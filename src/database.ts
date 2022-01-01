@@ -1,11 +1,11 @@
-import { createPool, Pool } from 'mysql'
+import { createPool, Pool } from 'mysql2/promise'
 
 export async function connect(): Promise<Pool> {
     const connection = await createPool({
         host: 'localhost',
         user: 'root',
         password : 'root',
-        database: 'smarttrader',
+        database: 'ubgnft',
         connectionLimit: 10
     });
     return connection;

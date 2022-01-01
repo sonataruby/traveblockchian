@@ -6,6 +6,9 @@ import expressLayouts from 'express-ejs-layouts';
 import ejs from 'ejs';
 const app: Application = express();
 const server: http.Server = http.createServer(app);
+import { getRows as ads} from './modules/Ads';
+import { getRows as marketplance} from './modules/Marketplane';
+import { getRows as marketnft} from './modules/Marketnft';
 
 const publicDirectoryPath = path.join(__dirname, "./public");
 app.use(express.static(publicDirectoryPath));
@@ -25,15 +28,29 @@ app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
 /* Home route */
-app.get("/", (req: Request, res: Response) => {
-	res.render("index",{page : jsonfile.main})
+app.get("/", async (req: Request, res: Response) => {
+	let adsx = await ads(); 
+	let marketplancex = await marketplance(6); 
+	let marketnftx = await marketnft(); 
+	//console.log(marketplancex);
+	res.render("index",{page : jsonfile.main, token : jsonfile.token, ads : adsx, marketplance: marketplancex, marketnftx :  marketnft});
 });
 
-app.get("/ido", (req: Request, res: Response) => {
-	res.render("ido",{page : jsonfile.ido})
+app.get("/nftmarket/info/:id", (req: Request, res: Response) => {
+	res.render("nftmarket_info",{page : jsonfile.nftmarket, token : jsonfile.token})
 });
 
- 
+app.get("/nftmarket/buynow/:id", (req: Request, res: Response) => {
+	res.render("nftmarket_buynow",{page : jsonfile.nftmarket, token : jsonfile.token})
+});
+
+app.get("/plancemarket/info/:id", (req: Request, res: Response) => {
+	res.render("plancemarket_info",{page : jsonfile.nftmarket, token : jsonfile.token})
+});
+
+app.get("/plancemarket/buynow/:id", (req: Request, res: Response) => {
+	res.render("plancemarket_buynow",{page : jsonfile.nftmarket, token : jsonfile.token})
+});
 /*
 app.get("/presell", (req: Request, res: Response) => {
 	res.render("presell")

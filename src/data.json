@@ -2,7 +2,11 @@
 	"main" : {
 		"title" : "UBG NFT"
 	},
-	"ido" : {
-		"title" : "UBG NFT"
+	"token" : {
+		"name" : "UBG Token",
+		"symbol" : "UBG"
+	},
+	"nftmarket" : {
+		"title" : "UBG NFTs Token Markets"
 	}
 }
