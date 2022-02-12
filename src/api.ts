@@ -11,7 +11,7 @@ import posts from './controller/posts';
 import ads from './controller/ads';
 import marketplace from './controller/marketplane';
 import marketnft from './controller/marketnft';
-
+import api from './controller/api';
 const app: Application = express();
 
 const server: http.Server = http.createServer(app);
@@ -44,7 +44,7 @@ app.use("/posts", posts);
 app.use("/marketplace", marketplace);
 app.use("/ads", ads);
 app.use("/marketnft", marketnft);
-
+app.use("/api", api);
 
 
 /** Error handling */

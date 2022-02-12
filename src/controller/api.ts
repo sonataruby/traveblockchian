@@ -1,7 +1,7 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction }  from 'express';
 import { connect } from '../database';
 const router = express.Router();
-router.get("api/hotel",async (req: Request, res: Response, next: NextFunction) => {
+router.get("hotel",async (req: Request, res: Response, next: NextFunction) => {
     var l = Number(req.query.l);
     var limit = 3;
     if(l > 0){
@@ -18,3 +18,4 @@ router.get("api/hotel",async (req: Request, res: Response, next: NextFunction) =
     //res.json(posts[0]);
 });
 
+export = router;
