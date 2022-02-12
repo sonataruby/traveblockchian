@@ -77,8 +77,13 @@
 
                           <div class="form-group">
                             <label for="exampleInputEmail1">Hotel</label>
-                            <select type="email" class="form-control"></select>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <select type="email" class="form-control">
+                                <option value="">----</option>
+                                <% hotel.forEach((item,index) => {%>
+                                    <option value=""><%=item.province%></option>
+                                <%});%>
+                            </select>
+                            
                           </div>
 
                           <div class="input-group input-daterange">

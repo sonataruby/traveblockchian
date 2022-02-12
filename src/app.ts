@@ -54,7 +54,8 @@ app.get("/mynft/sell-(:id).html", async (req: Request, res: Response) => {
 
 app.get("/mynft/booking-(:id).html", async (req: Request, res: Response) => {
 	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
-	res.render("account/booking",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data})
+	let hotel: AxiosResponse = await axios.get(`${ServiceAPI}/api/hotel`);
+	res.render("account/booking",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data, hotel : hotel.data})
 });
 
 
