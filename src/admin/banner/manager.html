@@ -1,0 +1,29 @@
+<h4>Banner Manager</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% banner.forEach(function(data) { %>
+    <tr>
+      <th scope="row"><%=data.id%></th>
+      <td><%=data.name%></td>
+      <td><%=data.start_date%></td>
+      <td><%=data.end_date%></td>
+      <td><%=data.status%></td>
+      <td class="text-right">
+      	<a class="btn btn-sm btn-primary" href="/ads/bannerdelete-<%=data.id%>.html">Delete</a>
+      	<a class="btn btn-sm btn-primary" href="/ads/banneredit-<%=data.id%>.html">Edit</a>
+      </td>
+    </tr>
+    <% }); %>
+    
+  </tbody>
+</table>
