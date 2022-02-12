@@ -40,9 +40,24 @@ app.get("/", async (req: Request, res: Response) => {
 	res.render("index",{page : jsonfile.main, token : jsonfile.token, ads : ads.data, marketplace: marketplace.data, marketnft :  marketnft.data});
 });
 
-app.get("/mynft.html", (req: Request, res: Response) => {
-	res.render("account/mynft",{page : jsonfile.nftmarket, token : jsonfile.token})
+app.get("/mynft.html", async (req: Request, res: Response) => {
+	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
+	res.render("account/mynft",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data})
 });
+
+
+app.get("/mynft/sell-(:id).html", async (req: Request, res: Response) => {
+	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
+	res.render("account/sellnft",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data})
+});
+
+
+app.get("/mynft/booking-(:id).html", async (req: Request, res: Response) => {
+	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
+	res.render("account/booking",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data})
+});
+
+
 
 app.get("/marketnft/info-(:id).html", async (req: Request, res: Response) => {
 	res.render("marketnft/info",{page : jsonfile.nftmarket, token : jsonfile.token})
