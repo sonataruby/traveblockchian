@@ -135,7 +135,7 @@
             
             
             axios.get("/api/province/"+id).then(function (response) {
-                $("#afternotes").html(response);
+                $("#afternotes").html(response.data);
                 console.log(response);
             });
             
