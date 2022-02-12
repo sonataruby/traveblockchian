@@ -136,13 +136,13 @@
             
             
             axios.get("/api/province/"+id).then(function (response) {
-                var html ='<div class="card"><div class="alert alert-warning" id="notes">'+response.data.notes+'</div>';
-                html += '<h4 class="mb-4">Service</h4>';
+                var html ='<div class="card mb-4"><div class="alert alert-warning" id="notes">'+response.data.notes+'</div></div>';
+                html += '<div class="card"><h4 class="mb-4">Service</h4>';
                 html += '<div>'+response.data.service+'</div>';
                 html += '<h4 class="mb-4">Infomation</h4>';
                 html += '<div>'+response.data.infomation+'</div>';
                 html += '<h4 class="mb-4">Maps</h4>';
-                html += '<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=API_KEY&q=Space+Needle,Seattle+WA"></iframe>';
+                html += '<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="'+response.data.maps+'"></iframe>';
                 html += '</div>';
                 $("#afternotes").html(html);
                 
