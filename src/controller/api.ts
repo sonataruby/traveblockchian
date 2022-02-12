@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction }  from 'express';
 import { connect } from '../database';
 const router = express.Router();
-router.get("hotel",async (req: Request, res: Response, next: NextFunction) => {
+
+router.get("/hotel",async (req: Request, res: Response, next: NextFunction) => {
     var l = Number(req.query.l);
     var limit = 3;
     if(l > 0){
