@@ -1,6 +1,6 @@
-
 import express, { Request, Response, NextFunction } from 'express';
 import { connect } from '../database';
+const router = express.Router();
 router.get("api/hotel",async (req: Request, res: Response, next: NextFunction) => {
     var l = Number(req.query.l);
     var limit = 3;
@@ -18,4 +18,3 @@ router.get("api/hotel",async (req: Request, res: Response, next: NextFunction) =
     //res.json(posts[0]);
 });
 
-const router = express.Router();
