@@ -134,9 +134,9 @@
             var id = $(this).val();
             
             
-            axios.get("/api/province/"+id,function(data){
-                
-                $("#afternotes").html(data);
+            axios.get("/api/province/"+id).then(function (response) {
+                $("#afternotes").html(response);
+                console.log(response);
             });
             
 
