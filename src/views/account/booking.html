@@ -83,7 +83,7 @@
                                 <select  class="form-control" id="province">
                                     <option value="">----</option>
                                     <% hotel.forEach((item,index) => {%>
-                                        <option value="<%=item.id%>" data-waring-<%=item.id%>="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
+                                        <option value="<%=item.id%>" data-waring="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
                                     <%});%>
                                 </select>
                             </div>
@@ -91,7 +91,7 @@
                           </div>
 
 
-                          <div class="input-daterange row">
+                          <div class="input-daterange row mb-4">
                               <div class="col-md-6">
                                 <label id="start-p" for="start">Checkin</label>
                                 <input  class="form-control" id="start" aria-describedby="emailHelp">
@@ -105,8 +105,9 @@
                                 
                               </div>
                           </div>
+                          <div id="afternotes"></div>
 
-                          <div class="alert alert-warning" id="notes"></div>
+                          
                         </div>
                           
                           <button type="submit" class="btn btn-primary">Send Booking</button>
@@ -131,8 +132,8 @@
         });
         $("#province").on("change",function(){
             var id = $(this).val();
-            var waring = $("option[data-waring-"+id+"]").text();
-            $("#notes").html(waring);
+            var waring = $('option:selected', this).attr('data-waring');
+            $("#afternotes").html('<div class="alert alert-warning" id="notes">'+waring+'</div>');
             console.log(waring);
             /*
             axios.get("/api/province/"+id,function(data){
