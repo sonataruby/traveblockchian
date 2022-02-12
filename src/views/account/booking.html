@@ -83,7 +83,7 @@
                                 <select  class="form-control" id="province">
                                     <option value="">----</option>
                                     <% hotel.forEach((item,index) => {%>
-                                        <option value="<%=item.id%>" data-waring="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
+                                        <option value="<%=item.id%>"><%=item.province%> - <%=item.star%> Star</option>
                                     <%});%>
                                 </select>
                             </div>
@@ -132,12 +132,11 @@
         });
         $("#province").on("change",function(){
             var id = $(this).val();
-            var waring = $('option:selected', this).attr('data-waring');
-            $("#afternotes").html('<div class="alert alert-warning" id="notes">'+waring+'</div>');
-            console.log(waring);
+            
             
             axios.get("/api/province/"+id,function(data){
-                console.log(data);
+                
+                $("#afternotes").html(data);
             });
             
 

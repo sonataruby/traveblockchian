@@ -82,7 +82,9 @@ app.get("/marketplace/info-(:id).html", async (req: Request, res: Response) => {
 	res.render("marketplace/info",{page : jsonfile.nftmarket, token : jsonfile.token, item: marketplace.data})
 });
 app.get("/api/province/:id",async (req: Request, res: Response) => {
-	res.render("account/province",{"khoa" : "khoa"});
+	var id = req.params.id;
+	let info: AxiosResponse = await axios.get(`${ServiceAPI}/api/province?id=${id}`);
+	res.render("account/province",{item : info.data});
 });
 /*
 app.get("/presell", (req: Request, res: Response) => {
