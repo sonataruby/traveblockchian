@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/hotel",async (req: Request, res: Response, next: NextFunction) => {
     var l = Number(req.query.l);
-    var limit = 3;
+    var limit = 68;
     if(l > 0){
         limit = l;
     }
