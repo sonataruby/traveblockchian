@@ -83,7 +83,7 @@
                                 <select  class="form-control" id="province">
                                     <option value="">----</option>
                                     <% hotel.forEach((item,index) => {%>
-                                        <option value="<%=item.id%>" data-waring="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
+                                        <option value="<%=item.id%>" data-waring-<%=item.id%>="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
                                     <%});%>
                                 </select>
                             </div>
