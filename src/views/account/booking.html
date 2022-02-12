@@ -17,6 +17,7 @@
                         <h1 class="title">NFT's Booking</h1>
                         <form>
                         <div class="card mb-4">
+                            <h4>Infomation</h4>
                           <div class="form-group row">
                             <div class="col-md-6">
                                 
@@ -69,32 +70,43 @@
                         
                         <div class="card mb-4">
                           <h4>Hotel</h4>
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Location</label>
-                            <select type="email" class="form-control">
-                                <option value="">----</option>
-                                <% hotel.forEach((item,index) => {%>
-                                    <option value=""><%=item.province%> - <%=item.star%> Star</option>
-                                <%});%>
-                            </select>
+                          <div class="form-group row">
+                            <div class="col-md-4">
+                                <label for="exampleInputEmail1">Country</label>
+                                <select  class="form-control">
+                                    <option value="vn">Vietnamme</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="exampleInputEmail1">Location</label>
+                                <select  class="form-control" id="province">
+                                    <option value="">----</option>
+                                    <% hotel.forEach((item,index) => {%>
+                                        <option value="<%=item.id%>" data-waring="<%=item.notes%>"><%=item.province%> - <%=item.star%> Star</option>
+                                    <%});%>
+                                </select>
+                            </div>
                             
                           </div>
+
 
                           <div class="input-daterange row">
                               <div class="col-md-6">
                                 <label id="start-p" for="start">Checkin</label>
-                                <input type="email" class="form-control" id="start" aria-describedby="emailHelp">
+                                <input  class="form-control" id="start" aria-describedby="emailHelp">
                                 
                               </div>
 
 
                               <div class="col-md-6">
                                 <label for="exampleInputEmail1">Checkout</label>
-                                <input type="email" class="form-control" id="end" aria-describedby="emailHelp">
+                                <input  class="form-control" id="end" aria-describedby="emailHelp">
                                 
                               </div>
                           </div>
 
+                          <div class="alert alert-warning" id="notes"></div>
                         </div>
                           
                           <button type="submit" class="btn btn-primary">Send Booking</button>
@@ -111,12 +123,23 @@
     $(document).ready(function(){
 
         $('.input-daterange').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        calendarWeeks : true,
-        clearBtn: true,
-        disableTouchKeyboard: true
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            calendarWeeks : true,
+            clearBtn: true,
+            disableTouchKeyboard: true
         });
+        $("#province").on("change",function(){
+            var id = $(this).val();
+            var waring = $("option[data-waring-"+id+"]").text();
+            $("#notes").html(waring);
+            console.log(waring);
+            /*
+            axios.get("/api/province/"+id,function(data){
+                console.log(data);
+            });
+            */
 
+        });
         });
 </script>
