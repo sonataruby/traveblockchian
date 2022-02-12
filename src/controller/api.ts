@@ -34,4 +34,35 @@ router.get("/province",async (req: Request, res: Response, next: NextFunction) =
 });
 
 
+router.get("/booking",async (req: Request, res: Response, next: NextFunction) => {
+   
+    
+    try {
+        const conn = await connect();
+        const [rows, fields] = await conn.query("SELECT * FROM booking ORDER BY DESC created LIMIT 100")  as any;
+        return res.json(rows);
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+});
+
+
+router.post("/booking",async (req: Request, res: Response, next: NextFunction) => {
+	
+    var id = Number(req.query.id);
+    
+    try {
+        const conn = await connect();
+        const [rows, fields] = await conn.query("SELECT * FROM booking WHERE id='"+id+"' LIMIT 1")  as any;
+        return res.json(rows[0]);
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+});
+
+
 export = router;

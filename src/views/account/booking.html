@@ -15,7 +15,7 @@
                     <!-- Block @s -->
                     <div class="nk-block nk-block-features-s3">
                         <h1 class="title">NFT's Booking</h1>
-                        <form>
+                        <form method="post" action="/booking.html">
                         <div class="card mb-4">
                             <h4>Infomation</h4>
                           <div class="form-group row">
@@ -137,7 +137,7 @@
             
             axios.get("/api/province/"+id).then(function (response) {
                 var html ='<div class="card mb-4"><div class="alert alert-warning" id="notes">'+response.data.notes+'</div></div>';
-                html += '<div class="card"><h4 class="mb-4">Service</h4>';
+                html += '<div class="card mb-4"><h4 class="mb-4">Service</h4>';
                 html += '<div>'+response.data.service+'</div>';
                 html += '<h4 class="mb-4">Infomation</h4>';
                 html += '<div>'+response.data.infomation+'</div>';
