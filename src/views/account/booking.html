@@ -18,20 +18,27 @@
                         <form>
                         <div class="card mb-4">
                           <div class="form-group">
-                            <label for="exampleInputEmail1">First Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <div class="col-md-6">
+                                
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                
+
+                          
+                            </div>
+                            <div class="col-md-6">
+                                
+                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                
+                            </div>
                           </div>
 
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Last Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                          </div>
-
 
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Full Name</label>
+                            <label for="exampleInputEmail1">Phone Number</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                           </div>
@@ -50,7 +57,7 @@
 
 
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Passort</label>
+                            <label for="exampleInputEmail1">Passort / ID</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                           </div>
@@ -58,46 +65,35 @@
 
 
 
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Start Date</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                          </div>
-
-
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">End Date</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                          </div>
+                         
 
                         </div>
                         
                         <div class="card mb-4">
-
+                          <h4>Hotel</h4>
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Hotel</label>
+                            <label for="exampleInputEmail1">Location</label>
                             <select type="email" class="form-control">
                                 <option value="">----</option>
                                 <% hotel.forEach((item,index) => {%>
-                                    <option value=""><%=item.province%></option>
+                                    <option value=""><%=item.province%> - <%=item.star%> Star</option>
                                 <%});%>
                             </select>
                             
                           </div>
 
-                          <div class="input-group input-daterange">
-                              <div class="form-group">
+                          <div class="input-daterange form-group">
+                              <div class="col-md-6">
                                 <label id="start-p" for="start">Checkin</label>
                                 <input type="email" class="form-control" id="start" aria-describedby="emailHelp">
-                                <span class="fa fa-calendar" id="fa-1"></span>
+                                
                               </div>
 
 
-                              <div class="form-group">
+                              <div class="col-md-6">
                                 <label for="exampleInputEmail1">Checkout</label>
                                 <input type="email" class="form-control" id="end" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                
                               </div>
                           </div>
 
