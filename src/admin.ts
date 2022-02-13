@@ -53,6 +53,24 @@ app.get("/ads/banner.html",async (req: Request, res: Response, next: NextFunctio
 	res.render("banner/manager",{page : jsonfile.main, banner:response.data})
 });
 
+/*Market Manager*/
+app.get("/marketplace/manager.html",async (req: Request, res: Response, next: NextFunction)=>{
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list?l=50`);
+	res.render("marketplace/manager",{page : jsonfile.main, marketplace:response.data})
+});
+
+app.post("/marketplace/manager.html",async (req: Request, res: Response, next: NextFunction)=>{
+		res.redirect("/marketplace/manager.html");
+});
+
+app.put("/marketplace/manager.html",async (req: Request, res: Response, next: NextFunction)=>{
+	res.redirect("/marketplace/manager.html");
+});
+
+app.delete("/marketplace/manager.html",async (req: Request, res: Response, next: NextFunction)=>{
+	res.redirect("/marketplace/manager.html");
+});
+
 server.listen(port, () => {
   console.log(`SERVER RUNNING ON ${port}`);
   

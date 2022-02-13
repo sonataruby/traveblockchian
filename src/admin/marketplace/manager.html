@@ -1,0 +1,47 @@
+<h4>Banner Manager</h4>
+<table class="table table-bordered table-hover table-inverse">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+      <th colspan="6">Options</th>
+      
+      <th></th>
+    </tr>
+    <tr>
+      <th colspan="4"></th>
+      
+      <th>Star</th>
+      <th>Night</th>
+      <th>Bed</th>
+      <th>Lever</th>
+      <th>Exit 1 Year</th>
+      <th>Prikey</th>
+      <th></th>
+    </tr>
+
+  </thead>
+  <tbody>
+  	<% marketplace.forEach(function(data) { %>
+    <tr>
+      <th scope="row"><%=data.id%></th>
+      <td><%=data.name%></td>
+      <td><%=data.price%></td>
+      <td><%=data.qty%></td>
+      <td><%=data.starts%></td>
+      <td><%=data.night%></td>
+      <td><%=data.bed%></td>
+      <td><%=data.levers%></td>
+      <td>--</td>
+      <td>--</td>
+      <td class="text-right">
+      	<a class="btn btn-sm btn-primary" href="/ads/bannerdelete-<%=data.id%>.html">Delete</a>
+      	<a class="btn btn-sm btn-primary" href="/ads/banneredit-<%=data.id%>.html">Edit</a>
+      </td>
+    </tr>
+    <% }); %>
+    
+  </tbody>
+</table>

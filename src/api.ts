@@ -2,9 +2,11 @@ import express, { Application, Request, Response } from "express";
 import path from "path";
 import http from "http";
 import fs from "fs";
+import helmet from "helmet";
+import cors from "cors";
 import morgan from 'morgan';
 import bodyParser from "body-parser";
-import { connect } from './database';
+//import { connect } from './database';
 
 import axios, {AxiosResponse} from 'axios';
 import posts from './controller/posts';
@@ -15,6 +17,9 @@ import api from './controller/api';
 const app: Application = express();
 
 const server: http.Server = http.createServer(app);
+
+app.use(helmet());
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
