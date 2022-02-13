@@ -21,14 +21,16 @@
                                 <div class="card card-lg-y animated pd-0" data-animate="fadeInUp" data-delay="1.4">
                                     <img class="card-img-top" src="<%=item.banner%>" style="max-height: 180px;">
                                     <div class="card-body">
-                                        <h4 class="title title-md title-dark mb-4"><%=item.name%></h4>
-                                        <ul>
-                                            <li class="d-flex justify-content-between"><div>Start : <%=item.starts%> </div><div> Bed : <%=item.bed%></div></li>
-                                            <li class="d-flex justify-content-between"><div>Night : <%=item.night%></div><div>Lever : <%=item.levers%></div></li>
-                                            <li>Price : <%=item.price%> <%=token.symbol%></li>
+                                        <% for(var i=0; i < item.star; i++) {%>
+                                            <i class="fa fa-star icon-star" aria-hidden="true"></i>
+                                        <% } %>
+                                        <ul class="border-bottom mb-3">
+                                            <li class="d-flex justify-content-between"><div>Night : <%=item.night%> </div><div> Bed : <%=item.bed%></div></li>
+                                            <li class="d-flex justify-content-between"><div>Exit Time: <%=item.exittime%> year</div></li>
+                                            <li>Price : <%=item.price%> <b><%=token.symbol%></b></li>
                                         </ul>
                                         <div>
-                                            <button class="btn btn-sm btn-info" id="marketplacebuynow" data-id="<%=item.id%>">Buy Now</button>
+                                            <button class="btn btn-sm btn-primary" id="marketplacebuynow" data-id="<%=item.id%>">Buy Now</button>
                                             <a class="btn btn-sm btn-primary" href="/marketplace/info-<%=item.id%>.html">Detail</a>
                                         </div>
                                     </div>

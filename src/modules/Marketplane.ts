@@ -56,7 +56,7 @@ const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
     
     try {
         const conn = await connect();
-        await conn.query("UPDATE marketplance SET name='"+req.body.name+"', qty='"+req.body.qty+"', price='"+req.body.price+"', banner='"+req.body.banner+"', night='"+req.body.night+"', bed='"+req.body.bed+"', starts='"+req.body.star+"', exittime='"+req.body.exittime+"', prikeys='"+req.body.prikey+"', description='"+req.body.description+"', sync=0 WHERE id='"+id+"'");
+        await conn.query("UPDATE marketplance SET name='"+req.body.name+"', qty='"+req.body.qty+"', price='"+req.body.price+"', banner='"+req.body.banner+"', night='"+req.body.night+"', bed='"+req.body.bed+"', star='"+req.body.star+"', exittime='"+req.body.exittime+"', prikeys='"+req.body.prikey+"', description='"+req.body.description+"', sync=0 WHERE id='"+id+"'");
         
         return res.status(200).json({status : "ok"});
     }
