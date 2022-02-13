@@ -77,6 +77,13 @@ app.get("/booking/location.html",async (req: Request, res: Response, next: NextF
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/hotel?l=50`);
 	res.render("travel/manager",{page : jsonfile.main, hotel:response.data})
 });
+
+app.get("/booking/provinceedit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	var id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/province?id=${id}`);
+	res.render("travel/editter",{page : jsonfile.main, info:response.data})
+});
+
 server.listen(port, () => {
   console.log(`SERVER RUNNING ON ${port}`);
   
