@@ -1,0 +1,35 @@
+<h4>Hotel Booking Manager <div><a class="btn btn-sm btn-primary" href="/booking/provincecreate.html">Create New</a></div></h4>
+<table class="table table-bordered table-hover table-inverse">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Country</th>
+      <th scope="col">Province</th>
+      <th scope="col">Province Code</th>
+      <th scope="col">Star</th>
+      <th>Status</th>
+      
+      <th></th>
+    </tr>
+    
+
+  </thead>
+  <tbody>
+  	<% hotel.forEach(function(data) { %>
+    <tr>
+      <th scope="row"><%=data.id%></th>
+      <td><%=data.country%></td>
+      <td><%=data.province%></td>
+      <td><%=data.province_code%></td>
+      <td><%=data.star%></td>
+      <td><%=data.status%></td>
+      
+      <td class="text-right">
+      	<a class="btn btn-sm btn-primary" href="/booking/provincedelete-<%=data.id%>.html">Delete</a>
+      	<a class="btn btn-sm btn-primary" href="/booking/provinceedit-<%=data.id%>.html">Edit</a>
+      </td>
+    </tr>
+    <% }); %>
+    
+  </tbody>
+</table>

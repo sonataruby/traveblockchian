@@ -71,6 +71,12 @@ app.delete("/marketplace/manager.html",async (req: Request, res: Response, next:
 	res.redirect("/marketplace/manager.html");
 });
 
+
+/*Booking Contrller*/
+app.get("/booking/location.html",async (req: Request, res: Response, next: NextFunction)=>{
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/hotel?l=50`);
+	res.render("travel/manager",{page : jsonfile.main, hotel:response.data})
+});
 server.listen(port, () => {
   console.log(`SERVER RUNNING ON ${port}`);
   
