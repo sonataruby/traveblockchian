@@ -49,11 +49,11 @@
   		<div class="form-group">
 		    <label for="exampleInputPassword1">Star</label>
 		    <select  class="form-control" name="star">
-		    	<option value="1">1 Star</option>
-		    	<option value="2">2 Star</option>
-		    	<option value="3">3 Star</option>
-		    	<option value="4">4 Star</option>
-		    	<option value="5" selected>5 Star</option>
+		    	<% for(var i=1; i <= 5; i++) {%>
+              <option value="<%=i%>" <% if(item.star == i){%>selected<%}else{%><%}%>><%=i%> Star</option>
+          <% } %>
+		    	
+		    	
 		    </select>
 		</div>
   	</div>
@@ -73,9 +73,9 @@
   		<div class="form-group">
 		    <label for="exampleInputPassword1">Exit</label>
 		    <select  class="form-control" name="timeexit">
-		    	<option value="1">1 Year</option>
-		    	<option value="2">2 Year</option>
-		    	<option value="3">3 Year</option>
+		    	<% for(var i=1; i <= 5; i++) {%>
+              <option value="<%=i%>" <% if(item.exittime == i){%>selected<%}else{%><%}%>><%=i%> Year</option>
+          <% } %>
 		    </select>
 		</div>
   	</div>
@@ -84,13 +84,13 @@
 
   <div class="form-group">
     <label for="exampleInputPassword1">Prikey</label>
-    <input type="text" class="form-control" name="prikey" value="<%=item.prikey%>">
+    <input type="text" class="form-control" name="prikey" value="<%=item.prikeys%>">
   </div>
 
   <h4>Infomation</h4>
   <div class="form-group">
     
-    <div id="description" style="min-height:300px;" class="form-control border"><%=item.description%></div>
+    <div id="description" style="min-height:300px;" class="form-control border"><%-item.description%></div>
    
   </div>
   <div>
