@@ -72,6 +72,25 @@ app.delete("/marketplace/manager.html",async (req: Request, res: Response, next:
 });
 
 
+app.get("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
+	res.render("marketplace/edit",{page : jsonfile.main, item:response.data})
+});
+
+app.post("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	console.log(req.body);
+	let response: AxiosResponse = await axios.put(`${ServiceAPI}/marketplace/update?id=${id}`,req.body);
+	res.redirect("/marketplace/manager.html");
+});
+
+app.get("/marketplace/item-delete-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list?l=50`);
+	res.redirect("/marketplace/manager.html");
+});
+
+
 /*Booking Contrller*/
 app.get("/booking/location.html",async (req: Request, res: Response, next: NextFunction)=>{
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/hotel?l=50`);

@@ -1,0 +1,142 @@
+<h4>Item Marketplance Edit</h4>
+<form action="/marketplace/item-edit-<%=item.id%>.html" method="post">
+	<div class="card">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" class="form-control" name="name" value="<%=item.name%>">
+    
+  </div>
+  	<div class="row">
+	  	<div class="col-md-6 mb-4">
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Price</label>
+		    
+		    <div class="input-group">
+			  <input type="text" class="form-control" name="price" value="<%=item.price%>">
+			  <div class="input-group-append">
+			    <button class="btn btn-primary" type="button" id="button-addon2">UBG</button>
+			  </div>
+			</div>
+		  </div>
+		  
+	  	</div>
+	  	<div class="col-md-6 mb-4">
+
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Qty</label>
+		    <input type="number" class="form-control" name="qty" value="<%=item.qty%>">
+		  </div>
+		</div>
+	</div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Banner</label>
+    
+    <div class="input-group">
+	  <input type="text" class="form-control" name="banner" value="<%=item.banner%>">
+	  <div class="input-group-append">
+	    <button class="btn btn-primary" type="button" id="button-addon2">Upload</button>
+	  </div>
+	</div>
+  </div>
+
+  
+
+
+  <h4>Info Token</h4>
+  <div class="row">
+  	<div class="col-md-6 mb-4">
+  		<div class="form-group">
+		    <label for="exampleInputPassword1">Star</label>
+		    <select  class="form-control" name="star">
+		    	<option value="1">1 Star</option>
+		    	<option value="2">2 Star</option>
+		    	<option value="3">3 Star</option>
+		    	<option value="4">4 Star</option>
+		    	<option value="5" selected>5 Star</option>
+		    </select>
+		</div>
+  	</div>
+  	<div class="col-md-6 mb-4">
+  		<div class="form-group">
+		    <label for="exampleInputPassword1">Night</label>
+		    <input type="number" class="form-control" name="night" value="<%=item.night%>">
+		</div>
+  	</div>
+  	<div class="col-md-6 mb-4">
+  		<div class="form-group">
+		    <label for="exampleInputPassword1">Bed</label>
+		    <input type="number" class="form-control" name="bed" value="<%=item.bed%>">
+		</div>
+  	</div>
+  	<div class="col-md-6 mb-4">
+  		<div class="form-group">
+		    <label for="exampleInputPassword1">Exit</label>
+		    <select  class="form-control" name="timeexit">
+		    	<option value="1">1 Year</option>
+		    	<option value="2">2 Year</option>
+		    	<option value="3">3 Year</option>
+		    </select>
+		</div>
+  	</div>
+  </div>
+  
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Prikey</label>
+    <input type="text" class="form-control" name="prikey" value="<%=item.prikey%>">
+  </div>
+
+  <h4>Infomation</h4>
+  <div class="form-group">
+    
+    <div id="description" style="min-height:300px;" class="form-control border"><%=item.description%></div>
+   
+  </div>
+  <div>
+	  <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
+	</div>
+  </div>
+</form>
+
+<script src="https://cdn.tiny.cloud/1/2mip7l7c5xlpey2rq68tprkx8ni20jixacx9evq9820ojg9f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+
+
+
+var InfomationBodyConfig = {
+  selector: '#description',
+  menubar: false,
+  inline: true,
+  force_br_newlines : true,
+  force_p_newlines : false,
+  placeholder: 'Type here...',
+  plugins: [
+    'link',
+    'lists',
+    'powerpaste',
+    'autolink',
+    'tinymcespellchecker',
+    'image'
+  ],
+  toolbar: [
+    'undo redo | bold italic underline | fontselect fontsizeselect',
+    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent | image'
+  ],
+  valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+  valid_styles: {
+    '*': 'font-size,font-family,color,text-decoration,text-align'
+  },
+  powerpaste_word_import: 'clean',
+  powerpaste_html_import: 'clean'
+  
+};
+
+
+//tinymce.init(emailHeaderConfig);
+tinymce.init(InfomationBodyConfig);
+
+
+
+</script>

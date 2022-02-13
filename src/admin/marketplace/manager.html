@@ -1,4 +1,4 @@
-<h4>Banner Manager</h4>
+<h4>Marketplace NFT's Manager</h4>
 <table class="table table-bordered table-hover table-inverse">
   <thead>
     <tr>
@@ -16,8 +16,7 @@
       <th>Star</th>
       <th>Night</th>
       <th>Bed</th>
-      <th>Lever</th>
-      <th>Exit 1 Year</th>
+      <th>Exit</th>
       <th>Prikey</th>
       <th></th>
     </tr>
@@ -33,12 +32,13 @@
       <td><%=data.starts%></td>
       <td><%=data.night%></td>
       <td><%=data.bed%></td>
-      <td><%=data.levers%></td>
-      <td>--</td>
-      <td>--</td>
+      <td><%=data.exittime%> (Year)</td>
+      
+      <td><%=data.prikeys%></td>
       <td class="text-right">
-      	<a class="btn btn-sm btn-primary" href="/ads/bannerdelete-<%=data.id%>.html">Delete</a>
-      	<a class="btn btn-sm btn-primary" href="/ads/banneredit-<%=data.id%>.html">Edit</a>
+        <a class="btn btn-sm btn-primary" href="/marketplace/item-sync-<%=data.id%>.html">Sync</a>
+      	<a class="btn btn-sm btn-primary" href="/marketplace/item-delete-<%=data.id%>.html">Delete</a>
+      	<a class="btn btn-sm btn-primary" href="/marketplace/item-edit-<%=data.id%>.html">Edit</a>
       </td>
     </tr>
     <% }); %>

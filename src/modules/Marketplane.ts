@@ -51,4 +51,19 @@ const getInfo = async ( req: Request, res: Response, next: NextFunction) => {
     //res.json(posts[0]);
 }
 
-export default {getAds,getRows,getInfo};
+const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
+    var id = Number(req.query.id);
+    
+    try {
+        const conn = await connect();
+        await conn.query("UPDATE marketplance SET name='"+req.body.name+"', qty='"+req.body.qty+"', price='"+req.body.price+"', banner='"+req.body.banner+"', night='"+req.body.night+"', bed='"+req.body.bed+"', starts='"+req.body.star+"', exittime='"+req.body.exittime+"', prikeys='"+req.body.prikey+"', description='"+req.body.description+"', sync=0 WHERE id='"+id+"'");
+        
+        return res.status(200).json({status : "ok"});
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+}
+
+export default {getAds,getRows,getInfo, setUpdate};
