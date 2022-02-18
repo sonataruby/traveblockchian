@@ -47,10 +47,19 @@ app.get("/", (req: Request, res: Response) => {
 	res.render("index",{page : jsonfile.main})
 });
 
+/*Banner Manager*/
 app.get("/ads/banner.html",async (req: Request, res: Response, next: NextFunction)=>{
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/ads/listfull`);
 	
 	res.render("banner/manager",{page : jsonfile.main, banner:response.data})
+});
+app.get("/ads/banner-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/ads/listfull`);
+	
+	res.render("banner/banner-edit",{page : jsonfile.main, banner:response.data})
+});
+app.post("/ads/-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	res.redirect("/ads/banner.html");
 });
 
 /*Market Manager*/
