@@ -17,12 +17,12 @@ import api from './controller/api';
 const app: Application = express();
 
 const server: http.Server = http.createServer(app);
-
+app.use('/upload', express.static('./upload'));
 app.use(helmet());
 app.use(cors());
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false, parameterLimit:50000}));
 app.use((req, res, next) => {
     // set the CORS policy
     res.header('Access-Control-Allow-Origin', '*');

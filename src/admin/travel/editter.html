@@ -34,16 +34,16 @@
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"><h4>Service</h4></label>
-			<div id="servicesEditter" style="min-height:300px;"><%=info.service%></div>
-			<textarea class="form-control editor" name="service" style="width: 1px; height: 1px; position: absolute; top: -1000vh;"><%=info.service%></textarea>
+			
+			<textarea class="form-control summernote" name="service"><%=info.service%></textarea>
 			
 		</div>
 
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"><h4>Infomation</h4></label>
-			<div id="infomationEditter" style="min-height:300px;"><%=info.infomation%></div>
-			<textarea class="form-control editor" name="infomation" style="width: 1px; height: 1px; position: absolute; top: -1000vh;"><%=info.infomation%></textarea>
+			
+			<textarea class="form-control summernote" name="infomation"><%=info.infomation%></textarea>
 			
 		</div>
 
@@ -55,106 +55,14 @@
 	</div>
 </div>
 
+<link rel="stylesheet" type="text/css" href="/assets/editer/summernote-bs4.css">
+
+<script src="/assets/editer/summernote-bs4.js" referrerpolicy="origin"></script>
 <script>
-var emailHeaderConfig = {
-  selector: '#servicesEditter h1, #servicesEditter h2, #servicesEditter h3,#servicesEditter h4,#servicesEditter h5,#servicesEditter h6,#servicesEditter h7',
-  menubar: false,
-  inline: true,
-  plugins: [ 
-    'lists',
-    'powerpaste',
-    'autolink'
-  ],
-  toolbar: 'undo redo | bold italic underline',
-  valid_elements: 'strong,em,span[style],a[href]',
-  valid_styles: {
-    '*': 'font-size,font-family,color,text-decoration,text-align'
-  },
-  powerpaste_word_import: 'clean',
-  powerpaste_html_import: 'clean',
-};
 
-var emailBodyConfig = {
-  selector: '#servicesEditter',
-  menubar: false,
-  inline: true,
-  force_br_newlines : true,
-  force_p_newlines : false,
-  placeholder: 'Type here...',
-  plugins: [
-    'link',
-    'lists',
-    'powerpaste',
-    'autolink',
-    'tinymcespellchecker',
-    'image'
-  ],
-  toolbar: [
-    'undo redo | bold italic underline | fontselect fontsizeselect',
-    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent | image'
-  ],
-  valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
-  valid_styles: {
-    '*': 'font-size,font-family,color,text-decoration,text-align'
-  },
-  powerpaste_word_import: 'clean',
-  powerpaste_html_import: 'clean',
-  setup: function (editor) {
-  	editor.on('change', function(e, text, html){
-        	$("#servicesEditter").parent().find("textarea.editor").val(editor.getContent());
-            //alert(editor.getContent());
-         });
-        editor.on('keyup', function(e, text, html){
-        	$("#servicesEditter").parent().find("textarea.editor").val(editor.getContent());
-            //alert(editor.getContent());
-         });
-	}
-  
-};
-
-
-var InfomationBodyConfig = {
-  selector: '#infomationEditter',
-  menubar: false,
-  inline: true,
-  force_br_newlines : true,
-  force_p_newlines : false,
-  placeholder: 'Type here...',
-  plugins: [
-    'link',
-    'lists',
-    'powerpaste',
-    'autolink',
-    'tinymcespellchecker',
-    'image'
-  ],
-  toolbar: [
-    'undo redo | bold italic underline | fontselect fontsizeselect',
-    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent | image'
-  ],
-  valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
-  valid_styles: {
-    '*': 'font-size,font-family,color,text-decoration,text-align'
-  },
-  powerpaste_word_import: 'clean',
-  powerpaste_html_import: 'clean',
-  setup: function (editor) {
-  	editor.on('change', function(e, text, html){
-        	$("#infomationEditter").parent().find("textarea.editor").val(editor.getContent());
-            //alert(editor.getContent());
-         });
-        editor.on('keyup', function(e, text, html){
-        	$("#infomationEditter").parent().find("textarea.editor").val(editor.getContent());
-            //alert(editor.getContent());
-         });
-	}
-  
-};
-
-
-//tinymce.init(emailHeaderConfig);
-tinymce.init(emailBodyConfig);
-tinymce.init(InfomationBodyConfig);
-
-
-</script>
+  $(document).ready(function() {
+      $('.summernote').summernote({
+        height: 550
+      });
+    });
+  </script>

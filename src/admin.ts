@@ -13,6 +13,7 @@ import net from 'net';
 const client = new net.Socket();
 import * as jsonfile from "./data.json"
 import axios, {AxiosResponse} from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 //const reqSock = new Request()
 //const repSock = new zmq.Reply()
 
@@ -23,10 +24,29 @@ const app: Application = express();
 
 const server: http.Server = http.createServer(app);
 
-const publicDirectoryPath = path.join(__dirname, "./public");
-app.use(express.static(publicDirectoryPath));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, './upload')));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false, parameterLimit:50000}));
+
+import multer from 'multer';
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + '/upload')
+  },
+  filename: function (req, file, cb) {
+  	let extArray = file.mimetype.split("/");
+    let extension = extArray[extArray.length - 1];
+    cb(null, file.fieldname + '-' + Date.now() + '.'+extension)
+  }
+})
+ 
+var upload = multer({ storage: storage })
+
+
+app.use(upload.single('image'));
 
 // Setting the port
 const port = 8084;
@@ -42,6 +62,7 @@ app.set('views', path.join(__dirname, 'admin'));
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
+
 /* Home route */
 app.get("/", (req: Request, res: Response) => {
 	res.render("index",{page : jsonfile.main})
@@ -54,11 +75,17 @@ app.get("/ads/banner.html",async (req: Request, res: Response, next: NextFunctio
 	res.render("banner/manager",{page : jsonfile.main, banner:response.data})
 });
 app.get("/ads/banner-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
-	let response: AxiosResponse = await axios.get(`${ServiceAPI}/ads/listfull`);
+	let id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/ads/info?id=${id}`);
 	
-	res.render("banner/banner-edit",{page : jsonfile.main, banner:response.data})
+	res.render("banner/banner-edit",{page : jsonfile.main, item:response.data})
 });
-app.post("/ads/-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+app.post("/ads/banner-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	if(req.file){
+		req.body.banner = "/"+req.file.filename;
+	}
+	let response: AxiosResponse = await axios.post(`${ServiceAPI}/ads/update?id=${id}`,req.body);
 	res.redirect("/ads/banner.html");
 });
 
@@ -84,13 +111,16 @@ app.delete("/marketplace/manager.html",async (req: Request, res: Response, next:
 app.get("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	let id = req.params.id;
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
+	if(response.data.prikeys == "") response.data.prikeys = uuidv4();
 	res.render("marketplace/edit",{page : jsonfile.main, item:response.data})
 });
 
 app.post("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	let id = req.params.id;
-	console.log(req.body);
-	let response: AxiosResponse = await axios.put(`${ServiceAPI}/marketplace/update?id=${id}`,req.body);
+	if(req.file){
+		req.body.banner = "/"+req.file.filename;
+	}
+	let response: AxiosResponse = await axios.post(`${ServiceAPI}/marketplace/update?id=${id}`,req.body);
 	res.redirect("/marketplace/manager.html");
 });
 

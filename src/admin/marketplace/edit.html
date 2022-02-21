@@ -1,5 +1,5 @@
 <h4>Item Marketplance Edit</h4>
-<form action="/marketplace/item-edit-<%=item.id%>.html" method="post">
+<form action="/marketplace/item-edit-<%=item.id%>.html" method="post" enctype="multipart/form-data">
 	<div class="card">
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
@@ -29,17 +29,25 @@
 		</div>
 	</div>
 
-  <div class="form-group">
-    <label for="exampleInputPassword1">Banner</label>
-    
-    <div class="input-group">
-	  <input type="text" class="form-control" name="banner" value="<%=item.banner%>">
-	  <div class="input-group-append">
-	    <button class="btn btn-primary" type="button" id="button-addon2">Upload</button>
-	  </div>
-	</div>
-  </div>
+  
 
+	<div class="row">
+		<div class="col-md-3">
+				
+				<div id="camera_icon" class="camera_icon" style="background-image:url(<%=item.banner%>)"></div>
+				<input type="hidden" name="banner" value="<%=item.banner%>">
+		</div>
+		<div class="col-md-9">
+			<div class="input-group">
+			  <div class="custom-file">
+			    <input type="file" class="custom-file-input" name="image" id="file_photo" aria-describedby="inputGroupFileAddon04">
+			    <label class="custom-file-label" for="file_photo">Choose file</label>
+			  </div>
+			  
+			</div>
+		</div>
+	</div>
+  
   
 
 
@@ -84,13 +92,14 @@
 
   <div class="form-group">
     <label for="exampleInputPassword1">Prikey</label>
-    <input type="text" class="form-control" name="prikey" value="<%=item.prikeys%>">
+    <input type="text" class="form-control" name="prikey" readonly value="<%=item.prikeys%>">
   </div>
 
   <h4>Infomation</h4>
   <div class="form-group">
     
-    <div id="description" style="min-height:300px;" class="form-control border"><%-item.description%></div>
+  	
+    <textarea id="description" name="description" style="min-height:300px;" class="form-control border"><%-item.description%></textarea>
    
   </div>
   <div>
@@ -99,44 +108,43 @@
   </div>
 </form>
 
-<script src="https://cdn.tiny.cloud/1/2mip7l7c5xlpey2rq68tprkx8ni20jixacx9evq9820ojg9f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<link rel="stylesheet" type="text/css" href="/assets/editer/summernote-bs4.css">
 
+<script src="/assets/editer/summernote-bs4.js" referrerpolicy="origin"></script>
+
+<style>
+    .camera_icon {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:#d7d7d7;
+  background-position: center center;
+  border: 1px solid #ddd;
+  height:300px;
+}
+    </style>
 <script>
 
+	$(document).ready(function() {
+      $('#description').summernote({
+        height: 550
+      });
+});
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                //$('#blah').attr('src', e.target.result);
+                document.getElementById('camera_icon').style.backgroundImage="url( " + e.target.result + ")";
+            }
 
-var InfomationBodyConfig = {
-  selector: '#description',
-  menubar: false,
-  inline: true,
-  force_br_newlines : true,
-  force_p_newlines : false,
-  placeholder: 'Type here...',
-  plugins: [
-    'link',
-    'lists',
-    'powerpaste',
-    'autolink',
-    'tinymcespellchecker',
-    'image'
-  ],
-  toolbar: [
-    'undo redo | bold italic underline | fontselect fontsizeselect',
-    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent | image'
-  ],
-  valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
-  valid_styles: {
-    '*': 'font-size,font-family,color,text-decoration,text-align'
-  },
-  powerpaste_word_import: 'clean',
-  powerpaste_html_import: 'clean'
-  
-};
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-
-//tinymce.init(emailHeaderConfig);
-tinymce.init(InfomationBodyConfig);
-
+    $("#file_photo").change(function(){
+        readURL(this);
+    });
 
 
 </script>
