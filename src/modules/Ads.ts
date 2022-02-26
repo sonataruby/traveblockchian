@@ -12,6 +12,7 @@ const getAds = async (req: Request, res: Response, next: NextFunction) => {
     if(l > 0){
         limit = l;
     }
+    
     try {
         const conn = await connect();
         const [rows, fields] = await conn.query("SELECT * FROM ads WHERE start_date < NOW() AND end_date > NOW() AND status='On' LIMIT "+limit)  as any;
@@ -22,6 +23,26 @@ const getAds = async (req: Request, res: Response, next: NextFunction) => {
     }
     //res.json(posts[0]);
 }
+
+
+const getAdsItems = async (req: Request, res: Response, next: NextFunction) => {
+    var l = Number(req.query.l);
+    var limit = 3;
+    if(l > 0){
+        limit = l;
+    }
+    
+    try {
+        const conn = await connect();
+        const [rows, fields] = await conn.query("SELECT * FROM ads_items WHERE start_date < NOW() AND end_date > NOW() AND status='On' LIMIT "+limit)  as any;
+        return res.json(rows);
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+}
+
 const getAdsFull = async (req: Request, res: Response, next: NextFunction) => {
     var l = Number(req.query.l);
     var limit = 3;
@@ -103,4 +124,4 @@ const onOffAds = async (req: Request, res: Response, next: NextFunction) => {
     //res.json(posts[0]);
 }
 
-export default {getAds, getAdsFull,updateAds,deleteAds,onOffAds, getAdsInfo};
+export default {getAds, getAdsFull,updateAds,deleteAds,onOffAds, getAdsInfo, getAdsItems};

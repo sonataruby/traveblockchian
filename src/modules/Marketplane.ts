@@ -11,7 +11,7 @@ const getAds = async ( req: Request, res: Response, next: NextFunction) => {
     }
     try {
         const conn = await connect();
-        const [rows, fields] = await conn.query("SELECT * FROM marketplance ORDER BY price ASC LIMIT "+limit)  as any;
+        const [rows, fields] = await conn.query("SELECT * FROM ads_items WHERE start_date < NOW() AND end_date > NOW() AND status='On' AND ads_type='marketplance' ORDER BY price ASC LIMIT "+limit)  as any;
         
         return res.status(200).json(rows);
     }

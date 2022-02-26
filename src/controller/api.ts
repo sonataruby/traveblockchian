@@ -39,7 +39,7 @@ router.get("/booking",async (req: Request, res: Response, next: NextFunction) =>
     
     try {
         const conn = await connect();
-        const [rows, fields] = await conn.query("SELECT * FROM booking ORDER BY DESC created LIMIT 100")  as any;
+        const [rows, fields] = await conn.query("SELECT * FROM booking ORDER BY id DESC LIMIT 100")  as any;
         return res.json(rows);
     }
     catch (e) {

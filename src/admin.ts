@@ -136,6 +136,12 @@ app.get("/booking/location.html",async (req: Request, res: Response, next: NextF
 	res.render("travel/manager",{page : jsonfile.main, hotel:response.data})
 });
 
+
+app.get("/booking/signals.html",async (req: Request, res: Response, next: NextFunction)=>{
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/booking`);
+	res.render("travel/booking",{page : jsonfile.main, data:response.data})
+});
+
 app.get("/booking/provinceedit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	var id = req.params.id;
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/api/province?id=${id}`);

@@ -1,0 +1,41 @@
+<h4>Customer Booking Manager <div><a class="btn btn-sm btn-primary" href="/booking/provincecreate.html">Create New</a></div></h4>
+<table class="table table-bordered table-hover table-inverse">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Token</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Hotel</th>
+      <th scope="col">Checkin</th>
+      <th scope="col">Checkout</th>
+      <th>Status</th>
+      
+      <th></th>
+    </tr>
+    
+
+  </thead>
+  <tbody>
+  	<% data.forEach(function(data) { %>
+    <tr>
+      <th><%=data.id%></th>
+      <td><%=data.refurn_token%></td>
+      <td><%=data.firstname%></td>
+      <td><%=data.lastname%></td>
+      <td><%=data.email%></td>
+      <td><%=data.hotel_localtion%></td>
+      <td><%=data.hotel_checkin%></td>
+      <td><%=data.hotel_checkout%></td>
+      <td><%=data.status%></td>
+      
+      <td class="text-right">
+      	<a class="btn btn-sm btn-primary" href="/booking/provincedelete-<%=data.id%>.html">Cancel</a>
+      	<a class="btn btn-sm btn-primary" href="/booking/provinceedit-<%=data.id%>.html">Confirm</a>
+      </td>
+    </tr>
+    <% }); %>
+    
+  </tbody>
+</table>

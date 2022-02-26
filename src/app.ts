@@ -40,7 +40,7 @@ app.get("/", async (req: Request, res: Response) => {
 	//console.log(marketplancex);
 	let ads: AxiosResponse = await axios.get(`${ServiceAPI}/ads/list`);
 	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/ads?l=6`);
-	let marketnft: AxiosResponse = await axios.get(`${ServiceAPI}/marketnft/ads`);
+	let marketnft: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/ads?l=6`);
 	res.render("index",{page : jsonfile.main, token : jsonfile.token, ads : ads.data, marketplace: marketplace.data, marketnft :  marketnft.data});
 });
 
