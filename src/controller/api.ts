@@ -52,16 +52,17 @@ router.get("/booking",async (req: Request, res: Response, next: NextFunction) =>
 router.post("/booking",async (req: Request, res: Response, next: NextFunction) => {
 	
     var id = Number(req.query.id);
-    
+    var token = req.query.token;
     try {
         const conn = await connect();
-        const [rows, fields] = await conn.query("SELECT * FROM booking WHERE id='"+id+"' LIMIT 1")  as any;
-        return res.json(rows[0]);
+        await conn.query("INSERT INTO `booking` (`tokenid`, `refurn_token`, `firstname`, `lastname`, `phonenumber`, `email`, `passport`, `address`, `hotel_country`, `hotel_localtion`, `hotel_checkin`, `hotel_checkout`, `status`, `admin_validate`) VALUES ('"+id+"', '"+token+"', '"+req.body.firstname+"', '"+req.body.lastname+"', '"+req.body.phone+"', '"+req.body.email+"', '"+req.body.passport+"', '"+req.body.address+"', '"+req.body.country+"', '"+req.body.province+"', '"+req.body.checkin+"', '"+req.body.checkout+"', 'News', '0');");
+        return res.json({status : "ok"});
     }
     catch (e) {
         console.log(e)
+        return res.json({status : "faild"});
     }
-    //res.json(posts[0]);
+    return res.json({status : "ok"});
 });
 
 

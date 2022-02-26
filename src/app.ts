@@ -4,25 +4,26 @@ import http from "http";
 import debug from "./config/debug";
 import expressLayouts from 'express-ejs-layouts';
 import ejs from 'ejs';
-
+import bodyParser from "body-parser";
 
 const app: Application = express();
 const server: http.Server = http.createServer(app);
 import axios, {AxiosResponse} from 'axios';
 
 const ServiceAPI = "http://127.0.0.1:8083";
-
+import { v4 as uuidv4 } from 'uuid';
 
 const publicDirectoryPath = path.join(__dirname, "./public");
 app.use(express.static(publicDirectoryPath));
 
 // Setting the port
-const port = debug.PORT;
+const port = debug.PORT; 
 
 import * as jsonfile from "./data.json"
 // EJS setup
 app.use(expressLayouts);
-
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false, parameterLimit:50000}));
 // Setting the root path for views directory
 app.set('views', path.join(__dirname, 'views'));
 
@@ -53,9 +54,18 @@ app.get("/mynft/sell-(:id).html", async (req: Request, res: Response) => {
 
 
 app.get("/mynft/booking-(:id).html", async (req: Request, res: Response) => {
+	var id = req.params.id;
 	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
 	let hotel: AxiosResponse = await axios.get(`${ServiceAPI}/api/hotel`);
-	res.render("account/booking",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data, hotel : hotel.data})
+	res.render("account/booking",{page : jsonfile.nftmarket, token : jsonfile.token,  marketnft: marketplace.data, hotel : hotel.data, tokenid : id})
+});
+
+
+app.post("/mynft/booking-(:id).html", async (req: Request, res: Response) => {
+	var id = req.params.id;
+
+	await axios.post(`${ServiceAPI}/api/booking?id=${id}&token=${uuidv4()}`,req.body);
+	res.redirect("/mynft.html");
 });
 
 
