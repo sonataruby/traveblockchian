@@ -5,7 +5,8 @@ import debug from "./config/debug";
 import expressLayouts from 'express-ejs-layouts';
 import ejs from 'ejs';
 import bodyParser from "body-parser";
-
+import Web3 from "web3";
+import Web3Modal from "web3modal";
 const app: Application = express();
 const server: http.Server = http.createServer(app);
 import axios, {AxiosResponse} from 'axios';
@@ -13,8 +14,8 @@ import axios, {AxiosResponse} from 'axios';
 const ServiceAPI = "http://127.0.0.1:8083";
 import { v4 as uuidv4 } from 'uuid';
 
-const publicDirectoryPath = path.join(__dirname, "./public");
-app.use(express.static(publicDirectoryPath));
+
+
 
 // Setting the port
 const port = debug.PORT; 
@@ -22,6 +23,8 @@ const port = debug.PORT;
 import * as jsonfile from "./data.json"
 // EJS setup
 app.use(expressLayouts);
+app.use(express.static(path.join(__dirname, './upload')));
+app.use(express.static(path.join(__dirname, "./public")));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false, parameterLimit:50000}));
 // Setting the root path for views directory
