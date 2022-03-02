@@ -74,7 +74,7 @@ app.post("/mynft/booking-(:id).html", async (req: Request, res: Response) => {
 
 
 app.get("/marketnft/info-(:id).html", async (req: Request, res: Response) => {
-	res.render("marketnft/info",{page : jsonfile.nftmarket, token : jsonfile.token})
+	res.render("marketnft/info",{page : jsonfile.nftmarket, token : jsonfile.token, item : {}})
 });
 
 

@@ -1,7 +1,7 @@
 SmartApp = (function (SmartApp, $, window) {
     "use strict";
     
-    let _des = "ether"; //Des = 18
+    let _des = "gwei"; //Des = 18
 	//let _des = "gwei"; //Des = 9
 	var loginWallet = null;
 	var isConnect;
