@@ -54,6 +54,34 @@ const getInfo = async ( req: Request, res: Response, next: NextFunction) => {
     //res.json(posts[0]);
 }
 
+const getInfoSync = async ( id:number=0) => {
+    
+    try {
+        const conn = await connect();
+        const [rows, fields] = await conn.query("SELECT * FROM marketplance WHERE id='"+id+"' ORDER BY price ASC LIMIT 1")  as any;
+        
+        return rows[0];
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+}
+
+const setSync = async (id:number=0) => {
+    try {
+        
+        
+        const conn = await connect();
+        await conn.query("UPDATE marketplance SET sync='1' WHERE item_id='"+id+"'");
+        
+        return {status : "ok"};
+    }
+    catch (e) {
+        console.log(e)
+    }
+
+}
 const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
     var id = Number(req.query.id);
     
@@ -61,7 +89,7 @@ const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
         
         
         const conn = await connect();
-        await conn.query("UPDATE marketplance SET name='"+req.body.name+"', qty='"+req.body.qty+"', price='"+req.body.price+"', banner='"+req.body.banner+"', night='"+req.body.night+"', bed='"+req.body.bed+"', star='"+req.body.star+"', exittime='"+req.body.timeexit+"', prikeys='"+req.body.prikey+"', description='"+req.body.description+"', sync=0 WHERE id='"+id+"'");
+        await conn.query("UPDATE marketplance SET name='"+req.body.name+"', item_id='"+req.body.item_id+"', qty='"+req.body.qty+"', price='"+req.body.price+"', banner='"+req.body.banner+"', night='"+req.body.night+"', bed='"+req.body.bed+"', star='"+req.body.star+"', chuky='"+req.body.chuky+"', exitmoiky='"+req.body.exitmoiky+"', prikeys='"+req.body.prikey+"', description='"+req.body.description+"', sync=0 WHERE id='"+id+"'");
         
         return res.status(200).json({status : "ok"});
     }
@@ -71,4 +99,4 @@ const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
     //res.json(posts[0]);
 }
 
-export default {getAds,getRows,getInfo, setUpdate};
+export default {getAds,getRows,getInfo, getInfoSync, setUpdate, setSync};

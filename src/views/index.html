@@ -5,85 +5,10 @@
                 banner : "./banner-home.html",
                 html : ''
             }) %>
-    </header>
-    <main class="nk-pages">
+</header>
+<main class="nk-pages">
     
-
-
-<section class="section bg-transparent over-down over-up-xl-s1 pdt-0">
-                <div class="ui-mask-right ui-mask-s8"></div>
-                <div class="container">
-                    <!-- Block @s -->
-                    <div class="nk-block nk-block-features-s3">
-                        <h1 class="title">Market Place</h1>
-                        <div class="row justify-content-center">
-                           
-                            <% marketplace.forEach((item,index) => {%>
-                            <div class="col-lg-4 col-md-10 mb-4">
-                                <div class="card card-lg-y animated pd-0" data-animate="fadeInUp" data-delay="1.4">
-                                    <img class="card-img-top" src="<%=item.banner%>" style="max-height: 180px;">
-                                    <div class="card-body">
-                                        <h4 class="title title-md title-dark mb-4"><%=item.name%></h4>
-                                        <% for(var i=0; i < item.star; i++) {%>
-                                            <i class="fa fa-star icon-star" aria-hidden="true"></i>
-                                        <% } %>
-                                        <ul class="border-bottom mb-3">
-                                            <li class="d-flex justify-content-between"><div>Night : <%=item.night%> </div><div> Bed : <%=item.bed%></div></li>
-                                            <li class="d-flex justify-content-between"><div>Exit Time: <%=item.exittime%> year</div></li>
-                                            <li>Price : <%=item.price%> <%=token.symbol%></li>
-                                        </ul>
-                                        <div>
-                                            <button class="btn btn-sm btn-primary" id="marketplacebuynow" data-id="<%=item.id%>">Buy Now</button>
-                                            <a class="btn btn-sm btn-primary" href="/marketplace/info-<%=item.id%>.html">Detail</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div><!-- .col -->
-                             <% }); %>
-                        </div><!-- .row -->
-                    </div><!-- .block @e -->
-                </div>
-            </section>
-            <!-- // -->
-            <section class="section pdt-0 ov-v">
-                <div class="ui-mask-left ui-mask-s9"></div>
-                <div class="container">
-                    <!-- Block @s -->
-
-                    <div class="nk-block nk-block-features-s3">
-                        <h4 class="title">NFTs Market Exchange</h4>
-                        <div class="row justify-content-center">
-                           <% marketnft.forEach((item,index) => {%>
-   
-
-                            <div class="col-lg-3 col-md-10 mb-4">
-
-                                <div class="card card-lg-y animated pd-0" data-animate="fadeInUp" data-delay="1.4">
-                                    <img class="card-img-top" src="<%=item.banner%>" style="max-height: 140px;">
-                                    <div class="card-body">
-                                        <h4 class="title title-md title-dark mb-4"><%=item.name%></h4>
-                                        <% for(var i=0; i < item.star; i++) {%>
-                                            <i class="fa fa-star icon-star" aria-hidden="true"></i>
-                                        <% } %>
-                                        <ul>
-                                            <li class="d-flex justify-content-between"><div>Night : <%=item.night%> </div><div> Bed : <%=item.bed%></div></li>
-                                            <li class="d-flex justify-content-between"><div>Exit Time : <%=item.exittime%> year</div></li>
-                                            <li>Price : <%=item.price%> <b><%=token.symbol%></b></li>
-                                        </ul>
-                                        <div>
-                                            <a class="btn btn-sm btn-primary" href="/nftmarket/buynow/1">Buy Now</a>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                            <% }); %>
-                            
-                        </div><!-- .row -->
-                    </div><!-- .block @e -->
-                </div>
-            </section>
+<%- include("./home.html") %>
 </main>
     <footer class="nk-footer bg-theme-grad ov-h">
           <%- include("./components/footer.html") %>

@@ -45,6 +45,7 @@ build/Release
 autogen
 autogen.js
 *.lock
+contacts
 vps.txt
 # Dependency directories
 node_modules/

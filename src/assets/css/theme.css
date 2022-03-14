@@ -26,3 +26,11 @@ input[type=number]:focus,
 .icon-star{
   color: red;
 }
+
+.note-editor.card{
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+.note-editor .note-editing-area{
+  min-height: 250px;
+}

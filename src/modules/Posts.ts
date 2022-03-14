@@ -1,79 +1,92 @@
-import { Request, Response, NextFunction } from 'express';
-import axios, { AxiosResponse } from 'axios';
-
-interface Post {
-    userId: Number;
-    id: Number;
-    title: String;
-    body: String;
+import { connect } from '../database'
+const dbName = "posts";
+const searchField = "name";
+const prikeyField = "id";
+const getItem = async(id:number=0) =>{
+	try {
+        const conn = await connect();
+        
+        var sql = `SELECT * FROM ${dbName} WHERE ${prikeyField}=${id}`;
+        const [rows, fields] = await conn.query(sql)  as any;
+        return rows[0];
+    }
+    catch (e) {
+        return {};
+    }
+    return true;
 }
 
-// getting all posts
-const getPosts = async (req: Request, res: Response, next: NextFunction) => {
-    // get some posts
-    let result: AxiosResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-    let posts: [Post] = result.data;
-    return res.status(200).json({
-        message: posts
-    });
-};
+const getItemByUrl = async(id:any="") =>{
+    try {
+        const conn = await connect();
+        
+        var sql = `SELECT * FROM ${dbName} WHERE url=${id}`;
+        const [rows, fields] = await conn.query(sql)  as any;
+        return rows[0];
+    }
+    catch (e) {
+        return {};
+    }
+    return true;
+}
 
-// getting a single post
-const getPost = async (req: Request, res: Response, next: NextFunction) => {
-    // get the post id from the req
-    let id: string = req.params.id;
-    // get the post
-    let result: AxiosResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    let post: Post = result.data;
-    return res.status(200).json({
-        message: post
-    });
-};
 
-// updating a post
-const updatePost = async (req: Request, res: Response, next: NextFunction) => {
-    // get the post id from the req.params
-    let id: string = req.params.id;
-    // get the data from req.body
-    let title: string = req.body.title ?? null;
-    let body: string = req.body.body ?? null;
-    // update the post
-    let response: AxiosResponse = await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-        ...(title && { title }),
-        ...(body && { body })
-    });
-    // return response
-    return res.status(200).json({
-        message: response.data
-    });
-};
 
-// deleting a post
-const deletePost = async (req: Request, res: Response, next: NextFunction) => {
-    // get the post id from req.params
-    let id: string = req.params.id;
-    // delete the post
-    let response: AxiosResponse = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    // return response
-    return res.status(200).json({
-        message: 'post deleted successfully'
-    });
-};
+const listItems = async(limit:number=8,page:number=1, type:any="Post", search:any="") =>{
+	var sql = "";
+    try {
+    const conn = await connect();
+    if(search == ""){
+        sql = `SELECT * FROM ${dbName} WHERE type='${type}' ORDER BY id DESC LIMIT ${limit}`;
+    }else{
+        sql = `SELECT * FROM ${dbName} WHERE type='${type}' AND ${searchField} LIKE '%"+search+"%'  ORDER BY id DESC LIMIT ${limit}`;
+    }
+    const [rows, fields] = await conn.query(sql)  as any;
+    
+    return rows;
+    }
+    catch (e) {
+        return [];
+    }
+}
 
-// adding a post
-const addPost = async (req: Request, res: Response, next: NextFunction) => {
-    // get the data from req.body
-    let title: string = req.body.title;
-    let body: string = req.body.body;
-    // add the post
-    let response: AxiosResponse = await axios.post(`https://jsonplaceholder.typicode.com/posts`, {
-        title,
-        body
-    });
-    // return response
-    return res.status(200).json({
-        message: response.data
-    });
-};
+const createItem = async(obj = "") =>{
+	try {
+        const conn = await connect();
+        var sql = `INSERT INTO ${dbName} SET ${obj}`;
+        await conn.query(sql);
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+    return true;
+}
 
-export default { getPosts, getPost, updatePost, deletePost, addPost };
+const updateItem = async(id:number=0, obj="") =>{
+	try {
+        const conn = await connect();
+        var sql = `UPDATE ${dbName} SET ${obj} WHERE ${prikeyField}=${id}`;
+        await conn.query(sql);
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+    return true;
+}
+
+const deleteItem = async(id:number=0) =>{
+	try {
+    const conn = await connect();
+    var sql = `DELETE FROM ${dbName} WHERE ${prikeyField}=${id}`;
+    await conn.query(sql);
+    return true;
+    }
+    catch (e) {
+        return true;
+    }
+    return true;
+}
+
+export default {getItem,getItemByUrl, listItems, createItem, updateItem, deleteItem};

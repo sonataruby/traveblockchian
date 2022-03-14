@@ -1,12 +1,25 @@
 <h4>Item Marketplance Edit</h4>
 <form action="/marketplace/item-edit-<%=item.id%>.html" method="post" enctype="multipart/form-data">
 	<div class="card">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Name</label>
-    <input type="text" class="form-control" name="name" value="<%=item.name%>">
-    
-  </div>
+  
   	<div class="row">
+  		<div class="col-md-6 mb-4">
+  			<div class="form-group">
+			    <label for="exampleInputEmail1">Name</label>
+			    <input type="text" class="form-control" name="name" value="<%=item.name%>">
+			    
+			</div>
+  		</div>  
+
+  		<div class="col-md-6 mb-4">
+  			<div class="form-group">
+			    <label for="exampleInputEmail1">Item ID</label>
+			    <input type="text" class="form-control" name="item_id" value="<%=item.item_id%>">
+			    
+			</div>
+  		</div>
+
+  		
 	  	<div class="col-md-6 mb-4">
 		  <div class="form-group">
 		    <label for="exampleInputPassword1">Price</label>
@@ -14,19 +27,19 @@
 		    <div class="input-group">
 			  <input type="text" class="form-control" name="price" value="<%=item.price%>">
 			  <div class="input-group-append">
-			    <button class="btn btn-primary" type="button" id="button-addon2">UBG</button>
+			    <button class="btn btn-primary" type="button" id="button-addon2" style="min-width:120px;">UBG</button>
 			  </div>
 			</div>
 		  </div>
 		  
 	  	</div>
 	  	<div class="col-md-6 mb-4">
-
-		  <div class="form-group">
+  		<div class="form-group">
 		    <label for="exampleInputPassword1">Qty</label>
 		    <input type="number" class="form-control" name="qty" value="<%=item.qty%>">
-		  </div>
 		</div>
+  	</div>
+	  	
 	</div>
 
   
@@ -77,16 +90,24 @@
 		    <input type="number" class="form-control" name="bed" value="<%=item.bed%>">
 		</div>
   	</div>
-  	<div class="col-md-6 mb-4">
+  	<div class="col-md-3 mb-4">
   		<div class="form-group">
-		    <label for="exampleInputPassword1">Exit</label>
-		    <select  class="form-control" name="timeexit">
+		    <label for="exampleInputPassword1">Chu ky</label>
+		    <select  class="form-control" name="chuky">
 		    	<% for(var i=1; i <= 5; i++) {%>
-              <option value="<%=i%>" <% if(item.exittime == i){%>selected<%}else{%><%}%>><%=i%> Year</option>
+              <option value="<%=i*365%>" <% if(item.chuky == i*365){%>selected<%}else{%><%}%>><%=i*365%> Day - (<%=i%> Year)</option>
           <% } %>
 		    </select>
 		</div>
   	</div>
+
+  	<div class="col-md-3 mb-4">
+  		<div class="form-group">
+		    <label for="exampleInputPassword1">Exit Moi ky</label>
+		    <input type="number" class="form-control" name="exitmoiky" value="<%=item.exitmoiky%>">
+		</div>
+  	</div>
+
   </div>
   
 
@@ -99,7 +120,7 @@
   <div class="form-group">
     
   	
-    <textarea id="description" name="description" style="min-height:300px;" class="form-control border"><%-item.description%></textarea>
+    <textarea id="description" name="description" style="min-height:300px;" class="form-control summernote"><%-item.description%></textarea>
    
   </div>
   <div>
@@ -108,9 +129,6 @@
   </div>
 </form>
 
-<link rel="stylesheet" type="text/css" href="/assets/editer/summernote-bs4.css">
-
-<script src="/assets/editer/summernote-bs4.js" referrerpolicy="origin"></script>
 
 <style>
     .camera_icon {
@@ -124,11 +142,7 @@
     </style>
 <script>
 
-	$(document).ready(function() {
-      $('#description').summernote({
-        height: 550
-      });
-});
+	
 function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

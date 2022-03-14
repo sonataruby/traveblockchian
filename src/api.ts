@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 //import { connect } from './database';
 
 import axios, {AxiosResponse} from 'axios';
-import posts from './controller/posts';
+import posts from './controller/Posts';
 import ads from './controller/ads';
 import marketplace from './controller/marketplane';
 import marketnft from './controller/marketnft';

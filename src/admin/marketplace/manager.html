@@ -5,38 +5,39 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
-      <th scope="col">Qty</th>
+      
       <th colspan="6">Options</th>
       
-      <th></th>
-    </tr>
-    <tr>
-      <th colspan="4"></th>
-      
-      <th>Star</th>
+      <th></th> 
+    </tr>  
+    <tr>  
+      <th colspan="3"></th> 
+       
+      <th>Star</th> 
       <th>Night</th>
       <th>Bed</th>
       <th>Exit</th>
       <th>Prikey</th>
       <th></th>
-    </tr>
+    </tr> 
 
   </thead>
   <tbody>
   	<% marketplace.forEach(function(data) { %>
-    <tr>
-      <th scope="row"><%=data.id%></th>
+    <tr>  
+      <th scope="row"><%=data.item_id%></th>
       <td><%=data.name%></td>
       <td><%=data.price%></td>
-      <td><%=data.qty%></td>
+      
       <td><%=data.star%></td>
       <td><%=data.night%></td>
       <td><%=data.bed%></td>
-      <td><%=data.exittime%> (Year)</td>
+      <td><%=data.exittime%> (Day)</td>
       
       <td><%=data.prikeys%></td>
       <td class="text-right">
-        <a class="btn btn-sm btn-primary" href="/marketplace/item-sync-<%=data.id%>.html">Sync</a>
+        <a class="btn btn-sm btn-primary synccontent" data-id="<%=data.id%>">Sync Content</a> 
+        <a class="btn btn-sm btn-primary sync" data-id="<%=data.id%>">Sync Info</a>
       	<a class="btn btn-sm btn-primary" href="/marketplace/item-delete-<%=data.id%>.html">Delete</a>
       	<a class="btn btn-sm btn-primary" href="/marketplace/item-edit-<%=data.id%>.html">Edit</a>
       </td>
@@ -45,3 +46,24 @@
     
   </tbody>
 </table>
+
+<script src="/assets/js/marketplace.js?ver=1930"></script>
+<script type="text/javascript">
+  $(".sync").on("click", function(){
+      var id = $(this).attr("data-id");
+      $.get("/marketplace/sync-"+id+".html", function(data){
+        SmartApp.Marketplace.init();
+        SmartApp.Marketplace.sync(data);
+      });
+  });
+
+  $(".synccontent").on("click", function(){
+      var id = $(this).attr("data-id");
+      $.get("/marketplace/sync-"+id+".html", function(data){
+        SmartApp.Marketplace.init();
+        SmartApp.Marketplace.syncContent(data);
+      });
+  });
+  
+
+</script>

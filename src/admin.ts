@@ -13,6 +13,7 @@ import net from 'net';
 const client = new net.Socket();
 import * as jsonfile from "./data.json"
 import axios, {AxiosResponse} from 'axios';
+import template from './controller/Templates';
 import { v4 as uuidv4 } from 'uuid';
 //const reqSock = new Request()
 //const repSock = new zmq.Reply()
@@ -67,6 +68,7 @@ app.set('view engine', 'html');
 app.get("/", (req: Request, res: Response) => {
 	res.render("index",{page : jsonfile.main})
 });
+app.use("/template",template);
 
 /*Banner Manager*/
 app.get("/ads/banner.html",async (req: Request, res: Response, next: NextFunction)=>{
@@ -111,7 +113,7 @@ app.delete("/marketplace/manager.html",async (req: Request, res: Response, next:
 app.get("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	let id = req.params.id;
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
-	if(response.data.prikeys == "") response.data.prikeys = uuidv4();
+	if(response.data.prikeys == "" || response.data.prikeys == "undefined") response.data.prikeys = uuidv4();
 	res.render("marketplace/edit",{page : jsonfile.main, item:response.data})
 });
 
@@ -127,6 +129,24 @@ app.post("/marketplace/item-edit-(:id).html",async (req: Request, res: Response,
 app.get("/marketplace/item-delete-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list?l=50`);
 	res.redirect("/marketplace/manager.html");
+});
+
+app.get('/marketplace/sync-(:id).html',async function(req: Request, res: Response, next: NextFunction){
+	var id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
+	var obj = {
+		item_id : response.data.item_id,
+		price : response.data.price,
+		star : response.data.star,
+		night : response.data.night,
+		bed : response.data.bed,
+		nam : response.data.name,
+		code : response.data.prikeys == "undefined" || response.data.prikeys == "" ? uuidv4() : response.data.prikeys,
+		chuky : response.data.chuky,
+		exitmoiky : response.data.exitmoiky,
+		qty : response.data.qty
+	};
+	return res.status(200).send(obj);
 });
 
 
