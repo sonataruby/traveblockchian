@@ -87,12 +87,14 @@ app.get("/marketnft.html", async (req: Request, res: Response) => {
 
 app.get("/marketplace.html",async (req: Request, res: Response) => {
 		let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list`);
-		res.render("marketplace/home",{page : jsonfile.nftmarket, token : jsonfile.token, marketplace: marketplace.data});
+		let ads: AxiosResponse = await axios.get(`${ServiceAPI}/ads/list`);
+		res.render("marketplace/home",{page : jsonfile.nftmarket, token : jsonfile.token, marketplace: marketplace.data, ads: ads.data});
 });
 app.get("/marketplace/info-(:id).html", async (req: Request, res: Response) => {
 	var id = req.params.id;
 	let marketplace: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
-	res.render("marketplace/info",{page : jsonfile.nftmarket, token : jsonfile.token, item: marketplace.data})
+	let ads: AxiosResponse = await axios.get(`${ServiceAPI}/ads/list`);
+	res.render("marketplace/info",{page : jsonfile.nftmarket, token : jsonfile.token, item: marketplace.data, ads : ads.data})
 });
 app.get("/api/province/:id",async (req: Request, res: Response) => {
 	var id = req.params.id;
