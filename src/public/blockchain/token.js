@@ -25,7 +25,7 @@ SmartApp = (function (SmartApp, $, window) {
         await SmartApp.Token.loadContracts();
         const balance = await TokenContact.balanceOf(login_wallet).call();
         SmartApp.Token.Balance = SmartApp.Blockchain.fromWei(balance);
-        $(".balance").html(balance);
+        $(".balance").html(SmartApp.Token.Balance);
     }
     SmartApp.components.docReady.push(SmartApp.Token.init);
     return SmartApp;
