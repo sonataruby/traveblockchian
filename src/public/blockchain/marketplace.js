@@ -17,18 +17,22 @@ SmartApp = (function (SmartApp, $, window) {
     }
     SmartApp.Marketplace.sync = async (obj) => {
         SmartApp.Blockchain.notifyWait("");
-        let data = MarketplaceContact.setMarketTour(obj.item_id, obj.price, obj.star,obj.night, obj.bed,obj.chuky, obj.exitmoiky).send({from : login_wallet}).then(async (data)=>{
-           
-            if(data.status == true){
+        try{
+            let data = MarketplaceContact.setMarketTour(obj.item_id, SmartApp.Blockchain.toWei(obj.price), obj.star,obj.night, obj.bed,obj.chuky, obj.exitmoiky).send({from : login_wallet}).then(async (data)=>{
+               
+                if(data.status == true){
 
-                var tx = {blockHash : data.blockHash, transactionHash : data.transactionHash, blockNumber : data.blockNumber};
-                await SmartApp.Blockchain.setReportUrl("marketplace/sync/"+obj.item_id,{token : "59e78438-fe00-41f3-97b8-37b13073d1e3"});
-                SmartApp.Blockchain.notify("Complete update");
-                
-            }else{
-                SmartApp.Blockchain.notify("Error update");
-            }
-        });
+                    var tx = {blockHash : data.blockHash, transactionHash : data.transactionHash, blockNumber : data.blockNumber, token : "59e78438-fe00-41f3-97b8-37b13073d1e3"};
+                    await SmartApp.Blockchain.setReportUrl("marketplace/sync/"+obj.item_id,tx);
+                    SmartApp.Blockchain.notify("Complete update");
+                    
+                }else{
+                    SmartApp.Blockchain.notify("Error update");
+                }
+            });
+        }catch(e){
+            SmartApp.Blockchain.notify("Error update");
+        }
     }
 
 
@@ -38,8 +42,8 @@ SmartApp = (function (SmartApp, $, window) {
            
             if(data.status == true){
 
-                var tx = {blockHash : data.blockHash, transactionHash : data.transactionHash, blockNumber : data.blockNumber};
-                await SmartApp.Blockchain.setReportUrl("marketplace/sync/"+obj.item_id,{token : "59e78438-fe00-41f3-97b8-37b13073d1e3"});
+                var tx = {blockHash : data.blockHash, transactionHash : data.transactionHash, blockNumber : data.blockNumber,token : "59e78438-fe00-41f3-97b8-37b13073d1e3"};
+                await SmartApp.Blockchain.setReportUrl("marketplace/sync/"+obj.item_id,tx);
                 SmartApp.Blockchain.notify("Complete update");
                 
             }else{
@@ -60,7 +64,7 @@ SmartApp = (function (SmartApp, $, window) {
             SmartApp.Blockchain.notify("Your Balance");
             return false;
         }
-        let data = await MarketplaceContact.buyTickets(id, songaymua).send({gas : SmartApp.Blockchain.getGasPrice()}).then(async (data) =>{
+        let data = await MarketplaceContact.buyTickets(id, songaymua).send({from : login_wallet, gas:300000}).then(async (data) =>{
             console.log(data);
         });
     }

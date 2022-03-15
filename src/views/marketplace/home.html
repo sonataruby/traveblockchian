@@ -59,14 +59,14 @@
             Select Day
             <select  class="form-control" name="chuky">
                 <% for(var i=1; i <= 5; i++) {%>
-              <option value="<%=i*365%>" <% if(item.chuky == i*365){%>selected<%}else{%><%}%>><%=i*365%> Day - (<%=i%> Year)</option>
+              <option value="<%=i*365%>"><%=i*365%> Day - (<%=i%> Year)</option>
           <% } %>
             </select>
       </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary marketplacebuyconfirm">Confirm</button>
-      </div>
+      </div> 
     </div>
   </div>
 </div>
