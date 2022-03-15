@@ -9,7 +9,7 @@
                     <div class=" position-relative animated fadeInUp" data-animate="fadeInUp" data-delay="1.35" style="visibility: visible; animation-delay: 1.35s;"> 
                         <ul class="slides">
                             <% ads.forEach((item,index) => {%>
-                            <li class="banner-wrap ov-v" style="width: 100%; float: left; height: 100%; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;background-image: url(https://univietravel.com/uploads/tours/tournoidia/phuquoc/190704102824-05-phu-quoc-vietnam.jpg); background-size: cover; background-repeat: no-repeat;" data-thumb-alt="">
+                            <li class="banner-wrap ov-v" style="width: 100%; float: left; height: 100%; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;background-image: url(<%=item.banner%>); background-size: cover; background-repeat: no-repeat;" data-thumb-alt="">
                                
                                     
                                         <div class="container" style="padding-top:70px; padding-bottom: 70px;">
@@ -17,14 +17,14 @@
                                                 <div class="col-lg-6">
                                                     <div class="banner-caption wide-auto text-center">
                                                         <div class="cpn-head">
-                                                            <h1 class="title title-xl-2 title-semibold">UBG Token NFT for Travel</h1>
+                                                            <h1 class="title title-xl-2 title-semibold"><%=item.description%></h1>
                                                         </div>
                                                         <div class="cpn-text cpn-text-s1">
                                                             <p class="lead">Global decentralize network to buy &amp; sell shares</p>
                                                         </div>
                                                         <div class="cpn-btns">
                                                             <ul class="btn-grp">
-                                                                <li><a href="#" class="btn btn-md btn-grad btn-round">Sign up to join</a></li>
+                                                                <li><a href="<%=item.link%>" class="btn btn-md btn-grad btn-round">Sign up to join</a></li>
                                                                 <li><a href="#" class="btn btn-md btn-grad btn-round">Token Distribution</a></li>
                                                             </ul>
                                                         </div>
