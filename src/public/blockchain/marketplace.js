@@ -58,7 +58,7 @@ SmartApp = (function (SmartApp, $, window) {
         var tokenBalance = await SmartApp.Token.getBalance();
         console.log("Balance ",tokenBalance, " id ",id," so ngay ",songaymua);
         let priceCall = await MarketplaceContact.getPricePayment(id, songaymua).call();
-        let price = SmartApp.Blockchain.fromWei(priceCall);
+        let price = SmartApp.Blockchain.toWei(priceCall);
         console.log("price ",price);
         if(tokenBalance < price){
             SmartApp.Blockchain.notify("Your Balance");
