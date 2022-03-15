@@ -16,8 +16,13 @@
                                             <div class="row align-items-center justify-content-center">
                                                 <div class="col-lg-6">
                                                     <div class="banner-caption wide-auto text-center">
-                                                        <%=item.description%>
-                                                        
+                                                        <%-item.description%>
+                                                        <div class="cpn-head">
+                                                            <h1 class="title title-xl-2 title-semibold"><%=item.description%></h1>
+                                                        </div>
+                                                        <div class="cpn-text cpn-text-s1">
+                                                            <p class="lead">Global decentralize network to buy &amp; sell shares</p>
+                                                        </div>
                                                         <div class="cpn-btns">
                                                             <ul class="btn-grp">
                                                                 <li><a href="<%=item.link%>" class="btn btn-md btn-grad btn-round">Sign up to join</a></li>
