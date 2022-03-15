@@ -117,6 +117,10 @@ app.get("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, 
 	res.render("marketplace/edit",{page : jsonfile.main, item:response.data})
 });
 
+app.get("/marketplace/settings",async (req: Request, res: Response, next: NextFunction)=>{
+	res.render("marketplace/settings",{page : jsonfile.main})
+});
+
 app.post("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
 	let id = req.params.id;
 	if(req.file){

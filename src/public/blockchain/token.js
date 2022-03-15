@@ -20,6 +20,10 @@ SmartApp = (function (SmartApp, $, window) {
     SmartApp.Token.getBalance = async () =>{
         return SmartApp.Token.Balance;
     };
+    SmartApp.Token.getContractAddress = () =>{
+        return TokenAddress;
+    };
+
     SmartApp.Token.init = async () => {
         await blockchain.init();
         await SmartApp.Token.loadContracts();

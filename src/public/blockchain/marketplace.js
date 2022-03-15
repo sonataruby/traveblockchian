@@ -68,6 +68,18 @@ SmartApp = (function (SmartApp, $, window) {
             console.log(data);
         });
     }
+
+    SmartApp.Marketplace.setNFT = async (nft) => {
+        let data = await MarketplaceContact.setNft(nft).send({from : login_wallet}).then(async (data) =>{
+            console.log(data);
+        });
+    }
+    SmartApp.Marketplace.setTokenMoney = async (address) => {
+        let data = await MarketplaceContact.setCurentcy(address).send({from : login_wallet}).then(async (data) =>{
+            console.log(data);
+        });
+    }
+
     SmartApp.Marketplace.setTicketsInfo = async (id, name, code) => {
         let data = await MarketplaceContact.setMarketTourCode(id, name, code).call();
     }

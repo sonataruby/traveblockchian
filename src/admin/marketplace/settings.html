@@ -1,0 +1,34 @@
+<h4>Blockchian Marketplance Settings</h4>
+<div class="form-group">
+	<label for="exampleInputPassword1">Set NFT Address</label>
+	<div class="input-group">
+	  <input type="text" class="form-control" name="nftaddress" value="">
+	  <div class="input-group-append">
+	    <button class="btn btn-primary" type="button" id="button-addon2" style="min-width:120px;">Submit NFT Address</button>
+	  </div>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="exampleInputPassword1">Set Token Address</label>
+	<div class="input-group">
+	  <input type="text" class="form-control" name="tokenaddress" value="">
+	  <div class="input-group-append">
+	    <button class="btn btn-primary" type="button" id="button-addon3" style="min-width:120px;">Set Address</button>
+	  </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('input[name=tokenaddress]').val(SmartApp.Token.getContractAddress());
+	$("#button-addon2").on("click",function(){
+		var address = $('input[name=nftaddress]').val();
+		SmartApp.Marketplace.setNFT(address);
+	});
+
+	$("#button-addon2").on("click",function(){
+		var address = $('input[name=tokenaddress]').val();
+		SmartApp.Marketplace.setTokenMoney(address);
+	});
+
+</script>
