@@ -144,7 +144,7 @@ app.get('/marketplace/sync-(:id).html',async function(req: Request, res: Respons
 		star : response.data.star,
 		night : response.data.night,
 		bed : response.data.bed,
-		nam : response.data.name,
+		name : response.data.name,
 		code : response.data.prikeys == "undefined" || response.data.prikeys == "" ? uuidv4() : response.data.prikeys,
 		chuky : response.data.chuky,
 		exitmoiky : response.data.exitmoiky,

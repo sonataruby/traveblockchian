@@ -4,8 +4,18 @@
 	<div class="input-group">
 	  <input type="text" class="form-control" name="nftaddress" value="">
 	  <div class="input-group-append">
-	    <button class="btn btn-primary" type="button" id="button-addon2" style="min-width:120px;">Submit NFT Address</button>
+	    <button class="btn btn-primary" type="button" id="button-addon2" style="min-width:220px;">Submit NFT Address</button>
 	  </div>
+	</div>
+</div> 
+
+<div class="form-group">
+	<label for="exampleInputPassword1">Set NFT Factory Address</label>
+	<div class="input-group">
+	  <input type="text" class="form-control" name="fatoryaddress" value="">
+	  <div class="input-group-append">
+	    <button class="btn btn-primary" type="button" id="setFactory" style="min-width:220px;">Submit Factory Address</button>
+	  </div> 
 	</div>
 </div>
 
@@ -16,19 +26,34 @@
 	  <div class="input-group-append">
 	    <button class="btn btn-primary" type="button" id="button-addon3" style="min-width:120px;">Set Address</button>
 	  </div>
-	</div>
+	</div> 
 </div>
-
+<script src="/assets/js/marketplace.js?ver=1930"></script>
+<script src="/assets/js/nfttravel.js?ver=1930"></script>
 <script type="text/javascript">
-	$('input[name=tokenaddress]').val(SmartApp.Token.getContractAddress());
-	$("#button-addon2").on("click",function(){
-		var address = $('input[name=nftaddress]').val();
-		SmartApp.Marketplace.setNFT(address);
-	});
+	jQuery(document).ready(function(){
 
-	$("#button-addon2").on("click",function(){
-		var address = $('input[name=tokenaddress]').val();
-		SmartApp.Marketplace.setTokenMoney(address);
+
+		$('input[name=tokenaddress]').val(SmartApp.Token.getContractAddress());
+		$('input[name=fatoryaddress]').val(SmartApp.Marketplace.getContractAddress());
+		$('input[name=nftaddress]').val(SmartApp.Travel.getContractAddress());
+		$("#button-addon2").on("click",function(){
+			var address = $('input[name=nftaddress]').val();
+			SmartApp.Marketplace.setNFT(address);
+		});
+
+		$("#button-addon3").on("click",function(){
+			var address = $('input[name=tokenaddress]').val();
+			SmartApp.Marketplace.setTokenMoney(address);
+		});
+
+		$("#setFactory").on("click",function(){
+			var address = $('input[name=fatoryaddress]').val();
+			SmartApp.Travel.setFatory(address);
+		});
+
+		
+		
 	});
 
 </script>

@@ -18,10 +18,10 @@
       <th>Bed</th>
       <th>Exit</th>
       <th>Prikey</th>
-      <th></th>
+      <th></th> 
     </tr> 
-
-  </thead>
+    
+  </thead> 
   <tbody>
   	<% marketplace.forEach(function(data) { %>
     <tr>  
@@ -34,24 +34,32 @@
       <td><%=data.bed%></td>
       <td><%=data.exitmoiky%> (Day)</td>
       
-      <td><%=data.prikeys%></td>
+      <td><%=data.prikeys%></td> 
       <td class="text-right">
+        <button type="button" class="btn btn-sm btn-primary syncinfo" data-id="<%=data.item_id%>">get Info</button> 
         <button type="button" class="btn btn-sm btn-primary synccontent" data-id="<%=data.id%>">Sync Content</button> 
         <button type="button" class="btn btn-sm btn-primary sync" data-id="<%=data.id%>">Sync Info</button>
       	<a class="btn btn-sm btn-primary" href="/marketplace/item-delete-<%=data.id%>.html">Delete</a>
       	<a class="btn btn-sm btn-primary" href="/marketplace/item-edit-<%=data.id%>.html">Edit</a>
       </td>
-    </tr>
+    </tr> 
     <% }); %>
     
   </tbody>
-</table>
+</table> 
 
 <script src="/assets/js/marketplace.js?ver=1930"></script>
 <script type="text/javascript">
+  
+  $(".syncinfo").on("click", function(){
+    var id = $(this).attr("data-id");
+    SmartApp.Marketplace.init();
+      SmartApp.Marketplace.getInfoTour(id);
+  });
   $(".sync").on("click", function(){
       var id = $(this).attr("data-id");
       $.get("/marketplace/sync-"+id+".html", function(data){
+        console.log(data);
         SmartApp.Marketplace.init();
         SmartApp.Marketplace.sync(data);
       });
@@ -60,6 +68,7 @@
   $(".synccontent").on("click", function(){
       var id = $(this).attr("data-id");
       $.get("/marketplace/sync-"+id+".html", function(data){
+        
         SmartApp.Marketplace.init();
         SmartApp.Marketplace.syncContent(data);
       });

@@ -23,6 +23,16 @@ SmartApp = (function (SmartApp, $, window) {
     SmartApp.Token.getContractAddress = () =>{
         return TokenAddress;
     };
+    SmartApp.Token.setAccess = async (address, amount, callback) => {
+        let checkAccess = await TokenContact.allowance(login_wallet,address).call();
+        console.log("get access : ",amount*1.2," ",checkAccess);
+        if(checkAccess < amount*1.2){
+            let data = await TokenContact.approve(address, amount*1.2).send();
+            console.log(data);
+        }
+        
+        return false;
+    }
 
     SmartApp.Token.init = async () => {
         await blockchain.init();

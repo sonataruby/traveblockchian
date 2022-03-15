@@ -8,7 +8,7 @@
 </header>
 <main class="nk-pages">
     
-
+  
 
     <section class="section bg-transparent over-down over-up-xl-s1 pdt-0">
                 <div class="ui-mask-right ui-mask-s8"></div>
@@ -85,11 +85,12 @@
       var modal = $(this)
       modal.find('.modal-body h1').text('Item NFT  ' + name + " "+star+" star")
       modal.find('.modal-footer button.marketplacebuyconfirm').attr("data-id",id);
-    })
+    });
 
     $(".marketplacebuyconfirm").on("click", function(){
         var id = $(this).attr("data-id");
-        var plance = $('.modal-body select').val();
+        var plance = Number($('.modal-body option:selected').val());
+        console.log(plance, "ID : ", id);
         if(plance >= 365) SmartApp.Marketplace.buyTickets(id,plance);
     });
 </script>
