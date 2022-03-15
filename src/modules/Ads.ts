@@ -80,7 +80,7 @@ const updateAds = async (req: Request, res: Response, next: NextFunction) => {
     try {
         
         const conn = await connect();
-        await conn.query("UPDATE ads SET name='"+req.body.name+"', link='"+req.body.link+"', banner='"+req.body.banner+"', start_date='"+req.body.start_date+"', end_date='"+req.body.end_date+"' WHERE id='"+id+"'");
+        await conn.query("UPDATE ads SET name='"+req.body.name+"', link='"+req.body.link+"', banner='"+req.body.banner+"', start_date='"+req.body.start_date+"', end_date='"+req.body.end_date+"', description='"+req.body.description+"' WHERE id='"+id+"'");
         
         return res.status(200).json({status : "ok"});
     }
