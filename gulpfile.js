@@ -94,7 +94,7 @@ gulp.task('web3', function() {
         .pipe(replace(/{token_abi}/g, loadABI("token")))
         .pipe(replace(/{token_address}/g, "0x9e29E268b20EB1d7930278e49e8c26511A40FE30"))
         .pipe(replace(/{nftfactory_abi}/g, loadABI("nftfactory")))
-        .pipe(replace(/{nftfactory_address}/g, "0x0f7952a712bd4ed12b4eee80a20223409edbb3e3"))
+        .pipe(replace(/{nftfactory_address}/g, "0x23f5ba792324925d89e866ff1814a95649478037"))
         .pipe(replace(/{nfttravel_abi}/g, loadABI("nfttravel")))
         .pipe(replace(/{nfttravel_address}/g, "0xf48d81d49c4f68dcf109d217319e02108971d7cc"))
         //.pipe(concat('./dist/provider.js'))

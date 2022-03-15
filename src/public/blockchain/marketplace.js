@@ -52,12 +52,17 @@ SmartApp = (function (SmartApp, $, window) {
 
     SmartApp.Marketplace.buyTickets = async (id, songaymua) => {
         var tokenBalance = await SmartApp.Token.getBalance();
-        let price = await MarketplaceContact.getPricePayment(id, songaymua).call();
+        console.log("Balance ",tokenBalance, " id ",id," so ngay ",songaymua);
+        let priceCall = await MarketplaceContact.getPricePayment(id, songaymua).call();
+        let price = SmartApp.Blockchain.fromWei(priceCall);
+        console.log("price ",price);
         if(tokenBalance < price){
             SmartApp.Blockchain.notify("Your Balance");
             return false;
         }
-        let data = await MarketplaceContact.buyTickets(id, songaymua).call();
+        let data = await MarketplaceContact.buyTickets(id, songaymua).send({gas : SmartApp.Blockchain.getGasPrice()}).then(async (data) =>{
+            console.log(data);
+        });
     }
     SmartApp.Marketplace.setTicketsInfo = async (id, name, code) => {
         let data = await MarketplaceContact.setMarketTourCode(id, name, code).call();

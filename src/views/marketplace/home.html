@@ -32,7 +32,7 @@
                                             <li>Price : <%=item.price%> <b><%=token.symbol%></b></li>
                                         </ul>
                                         <div>
-                                            <button class="btn btn-sm btn-primary" id="marketplacebuynow" data-id="<%=item.id%>">Buy Now</button>
+                                            <button class="btn btn-sm btn-primary marketplacebuynow" data-toggle="modal" data-target="#staticBackdrop" data-id="<%=item.item_id%>" data-star="<%=item.star%>" data-name="<%=item.name%>" data-price="<%=item.price%>">Buy Now</button>
                                             <a class="btn btn-sm btn-primary" href="/marketplace/info-<%=item.id%>.html">Detail</a>
                                         </div>
                                     </div>
@@ -44,7 +44,55 @@
                     </div><!-- .block @e -->
                 </div>
             </section>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Buy NFT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <h1></h1>
+            Select Day
+            <select  class="form-control" name="chuky">
+                <% for(var i=1; i <= 5; i++) {%>
+              <option value="<%=i*365%>" <% if(item.chuky == i*365){%>selected<%}else{%><%}%>><%=i*365%> Day - (<%=i%> Year)</option>
+          <% } %>
+            </select>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary marketplacebuyconfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             <!-- // -->
+<script src="/assets/js/marketplace.js?ver=1930"></script>
+<script type="text/javascript">
+    $('#staticBackdrop').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var id = button.data('id') // Extract info from data-* attributes
+      var name = button.data('name') // Extract info from data-* attributes
+      var star = button.data('star') // Extract info from data-* attributes
+      var price = button.data('price') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-body h1').text('Item NFT  ' + name + " "+star+" star")
+      modal.find('.modal-footer button.marketplacebuyconfirm').attr("data-id",id);
+    })
+
+    $(".marketplacebuyconfirm").on("click", function(){
+        var id = $(this).attr("data-id");
+        var plance = $('.modal-body select').val();
+        if(plance >= 365) SmartApp.Marketplace.buyTickets(id,plance);
+    });
+</script>
 </main>
 <footer class="nk-footer bg-theme-grad ov-h">
           <%- include("./../components/footer.html") %>
