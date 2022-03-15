@@ -9,8 +9,7 @@ SmartApp = (function (SmartApp, $, window) {
     
    
     SmartApp.Travel = {};
-    SmartApp.Travel.CacheHtml = '';
-    SmartApp.Travel.MakeHtml = '';
+    
     SmartApp.Travel.loadContracts = async () => {
 
             var contractLoader = await blockchain.loadContract(TokenAddress,Abi);
@@ -28,45 +27,43 @@ SmartApp = (function (SmartApp, $, window) {
             await TravelContact.setFactory(address).send();
     }
 
-    SmartApp.Travel.setHtml = async(item) => {
-        SmartApp.Travel.CacheHtml = item;
-    }
-    SmartApp.Travel.getCacheHtml = async() => {
-        return SmartApp.Travel.CacheHtml;
-    }
-    SmartApp.Travel.makeHtml = async(dataToken) => {
-        console.log(dataToken.name);
-        var itemMake = await SmartApp.Travel.getCacheHtml();
-        itemMake = itemMake.replace('{name}',dataToken.name);
-        itemMake = itemMake.replace('{star}',dataToken.star);
-        
-        SmartApp.Travel.MakeHtml += '<div class="col-lg-4 col-md-10 mb-4 item">';
-        SmartApp.Travel.MakeHtml += itemMake;
-        SmartApp.Travel.MakeHtml += '</div>';
-
-        return SmartApp.Travel.MakeHtml;
-    }
-    SmartApp.Travel.getHtml = async() =>{
-        let data = await SmartApp.Travel.MakeHtml;
-        return data;
-    }
-    SmartApp.Travel.myNFT = async (item, _class, _target) => {
+    
+    SmartApp.Travel.getMyNFT = async (htmlItem, _class, _target) => {
         if(TravelContact == undefined) await SmartApp.Travel.init();
-        await SmartApp.Travel.setHtml(item);
+        
         //SmartApp.Travel.MakeHtml = '';
-            await TravelContact.getTokenOwner(login_wallet).call().then(async (data)=>{
-               
-                data.forEach(async (token_id) =>{
-                    let dataToken = await TravelContact.getOptions(token_id).call();
-                    await SmartApp.Travel.makeHtml(dataToken);
-                    
-                });
-
-                
-            });
-        var getHtml = await SmartApp.Travel.getHtml();
-        console.log(getHtml);
-        $('#myNFT').html(getHtml); 
+        let Items = await TravelContact.getTokenOwner(login_wallet).call().then(async (data)=>{
+           var dataItems = [];
+           for (var i = 0; i < data.length; i++) {
+               let token_id = data[i];
+               let token = await TravelContact.getOptions(token_id).call();
+               //console.log(Object.keys(dataToken));
+               var html = htmlItem;
+                html = html.replace('{name}',token.name);
+                html = html.replace('{star}',token.star);
+                html = html.replace('{bed}',token.bed);
+                html = html.replace('{night}',token.night);
+                html = html.replace('{opentime}',moment.unix(token.opentime).format('DD-MM-YYYY HH:mm:ss'));
+                html = html.replace('{exittime}',moment.unix(Number(token.opentime) + Number(token.songaymua) * 84600).format('DD-MM-YYYY HH:mm:ss'));
+                html = html.replace('{lastupdate}',moment.unix(token.lastupdate).format('DD-MM-YYYY HH:mm:ss'));
+                html = html.replace('{songayhetky}',token.songayhetky);
+                html = html.replace('{songaymua}',token.songaymua);
+                html = html.replace('{banner}','src="/'+token.code+'"');
+                html = html.replaceAll("{item_id}",token_id);
+                //html = '<div class="'+_class+'">'+html+'</div>';
+                dataItems.push(html);
+           }
+            
+            return dataItems;
+            
+        });
+        
+        var htmlOutput = "";
+        for (var i = 0; i < Items.length; i++) {
+            htmlOutput += '<div class="'+_class+'">'+Items[i]+'</div>';
+        }
+        $("#"+_target).html(htmlOutput);
+        return true;
     }
 
     SmartApp.Travel.init = async () => {

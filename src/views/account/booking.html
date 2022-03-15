@@ -2,7 +2,7 @@
         <%- include("./../components/header.html",{
             title : "Booking NFT's",
             description : "Blockchain travel",
-            banner : "./banner.html",
+            banner : "./banner_member.html",
             html : ''
         }) %>
 </header>
@@ -11,14 +11,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 
 
-    <section class="section bg-transparent over-down over-up-xl-s1 pdt-0">
+    <section class="section bg-white over-down over-up-xl-s1 pdt-0">
                 <div class="ui-mask-right ui-mask-s8"></div>
                 <div class="container">
                     <!-- Block @s -->
                     <div class="nk-block nk-block-features-s3">
                         <h1 class="title">NFT's Booking</h1>
                         <form method="post" action="/mynft/booking-<%=tokenid%>.html">
-                        <div class="card mb-4">
+                        <div class="card mb-4 border">
                             <h4>Infomation</h4>
                           <div class="form-group row">
                             <div class="col-md-6">
@@ -27,7 +27,7 @@
                                     <input type="text" class="form-control" name="firstname">
                                     
 
-                          
+                           
                             </div>
                             <div class="col-md-6">
                                 
@@ -70,7 +70,7 @@
 
                         </div>
                         
-                        <div class="card mb-4">
+                        <div class="card mb-4 border">
                           <h4>Hotel</h4>
                           <div class="form-group row">
                             <div class="col-md-4">
@@ -111,9 +111,9 @@
 
                           
                         </div>
-                        <div id="afternotes"></div>
+                        <div id="afternotes "></div>
                           
-                          <button type="submit" class="btn btn-primary">Send Booking</button>
+                          <button type="submit" class="btn btn-primary btn-lg">Send Booking</button>
                         </form>
                     </div><!-- .block @e -->
                 </div>
@@ -138,7 +138,7 @@
             
             
             axios.get("/api/province/"+id).then(function (response) {
-                var html ='<div class="card mb-4"><div class="alert alert-warning" id="notes">'+response.data.notes+'</div></div>';
+                var html ='<div class="card mb-4 border"><div class="alert alert-warning" id="notes">'+response.data.notes+'</div></div>';
                 html += '<div class="card mb-4"><h4 class="mb-4">Service</h4>';
                 html += '<div>'+response.data.service+'</div>';
                 html += '<h4 class="mb-4">Infomation</h4>';

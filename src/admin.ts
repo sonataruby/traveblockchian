@@ -125,6 +125,10 @@ app.post("/marketplace/item-edit-(:id).html",async (req: Request, res: Response,
 	let id = req.params.id;
 	if(req.file){
 		req.body.banner = "/"+req.file.filename;
+		fs.copyFile(__dirname + "/upload/"+req.file.filename, __dirname + '/upload/'+req.body.prikey, (err) => {
+		 
+		  if (err) console.log('source.txt was copied to destination.txt');
+		});
 	}
 	let response: AxiosResponse = await axios.post(`${ServiceAPI}/marketplace/update?id=${id}`,req.body);
 	res.redirect("/marketplace/manager.html");

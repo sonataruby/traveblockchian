@@ -2,32 +2,38 @@
         <%- include("./../components/header.html",{
             title : "Plance Market",
             description : "Blockchain travel",
-            banner : "./banner.html",
+            banner : "./banner_member.html",
             html : ''
         }) %>
 </header> 
-<main class="nk-pages"> 
-         
-    <section class="section pdt-0">
-                <div class="ui-mask-right ui-mask-s8"></div>
+<main class="nk-pages">  
+ 
+    <section class="section  bg-white" style="padding-top:30px;">
+                
                 <div class="container">
-                    <!-- Block @s -->
+                    <!-- Block @s --> 
                     <div class="nk-block">
-                        <h1 class="title">My NFT's</h1>
+                        
                         <div class="row justify-content-center" id="myNFT">
-                           
+                             
                             <% for(var i=1; i <= 10; i++) {%>
                             <div class="col-lg-4 col-md-10 mb-4 item">
                                 <div class="card card-lg-y animated pd-0" data-animate="fadeInUp" data-delay="1.4">
-                                    <img class="card-img-top" src="{banner}" style="max-height: 180px;">
+                                    <img class="card-img-top" {banner} style="max-height: 180px;">
                                     <div class="card-body">
                                         <h4 class="title title-md title-dark mb-4">{name}</h4>
                                         <ul>
                                             <li class="d-flex justify-content-between"><div>Start : {star} </div><div> Bed : {bed}</div></li>
-                                            <li class="d-flex justify-content-between"><div>Night : {night}</div><div>Lever : </div></li>
-                                            <li>Exit Time : {exittime}</li>
+                                            <li class="d-flex justify-content-between"><div>Night : {night}</div></li>
+                                            
+                                            <li class="d-flex justify-content-between"><div>Round : {songaymua}</div><div>Next Exit : {songayhetky}</div></li>
+                                            <li><hr></li>
+                                            <li class="d-flex justify-content-between"><div>Create : {opentime}</div></li>
+                                            <li class="d-flex justify-content-between"><div>Next Exit : {exittime}</div></li>
+                                            <li>Update : {lastupdate}</li>
                                         </ul>
-                                        <div> 
+                                        <hr>
+                                        <div>
                                             
                                             <a class="btn btn-sm btn-info" href="/mynft/sell-{item_id}.html">Sell Now</a>
                                             <a class="btn btn-sm btn-primary" href="/mynft/booking-{item_id}.html">Booking</a>
@@ -46,9 +52,14 @@
 <script type="text/javascript">
     $(document).ready(async () => {
         var item = $(".item:first").html();
+        $("body").append('<div id="notifyWait"><div class="preloader"><span class="spinner spinner-round"></span></div></div>');
+        await SmartApp.Travel.getMyNFT(item,'col-lg-4 col-md-10 mb-4 item','myNFT').then(()=>{
+            $("body #notifyWait").remove();
+            
+        });
         
-
-        await SmartApp.Travel.myNFT(item,'','#myNFT');
+        
+        
     })
 </script>
 </main>
