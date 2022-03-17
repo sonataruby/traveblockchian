@@ -99,4 +99,19 @@ const setUpdate = async ( req: Request, res: Response, next: NextFunction) => {
     //res.json(posts[0]);
 }
 
-export default {getAds,getRows,getInfo, getInfoSync, setUpdate, setSync};
+const setAds = async ( id:number=0) => {
+    
+    try {
+        const conn = await connect();
+        const [rows, fields] = await conn.query("SELECT * FROM marketplance WHERE id='"+id+"' ORDER BY price ASC LIMIT 1")  as any;
+        const data = rows[0];
+        var sql = `INSERT INTO ads_items SET item_id='${data.item_id}', banner='${data.banner}', name='${data.name}', price='${data.price}', star='${data.star}', night='${data.night}', bed='${data.bed}', ads_type='marketplance', status='ON', start_date='', end_date=''`;
+        await conn.query(sql);
+    }
+    catch (e) {
+        console.log(e)
+    }
+    //res.json(posts[0]);
+}
+
+export default {getAds,getRows,getInfo, getInfoSync, setUpdate, setSync, setAds};

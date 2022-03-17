@@ -91,6 +91,21 @@ app.post("/ads/banner-edit-(:id).html",async (req: Request, res: Response, next:
 	res.redirect("/ads/banner.html");
 });
 
+app.get("/ads/marketplace.html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list?l=50`);
+	
+	res.render("banner/marketplance",{page : jsonfile.main, data:response.data})
+});
+
+app.get("/ads/marketnft.html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	let response: AxiosResponse = await axios.get(`${ServiceAPI}/ads/info?id=${id}`);
+	
+	res.render("banner/marketnft",{page : jsonfile.main, data:response.data})
+});
+
+
 /*Market Manager*/
 app.get("/marketplace/manager.html",async (req: Request, res: Response, next: NextFunction)=>{
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/list?l=50`);
@@ -115,6 +130,12 @@ app.get("/marketplace/item-edit-(:id).html",async (req: Request, res: Response, 
 	let response: AxiosResponse = await axios.get(`${ServiceAPI}/marketplace/info?id=${id}`);
 	if(response.data.prikeys == "" || response.data.prikeys == "undefined") response.data.prikeys = uuidv4();
 	res.render("marketplace/edit",{page : jsonfile.main, item:response.data})
+});
+
+app.get("/marketplace/ads-(:id).html",async (req: Request, res: Response, next: NextFunction)=>{
+	let id = req.params.id;
+	await axios.get(`${ServiceAPI}/marketplace/setads/${id}`);
+	res.redirect("/ads/marketplace.html");
 });
 
 app.get("/marketplace/settings",async (req: Request, res: Response, next: NextFunction)=>{

@@ -1,31 +1,44 @@
-<h4>Marketplance ADS</h4>
-<table class="table">
+<h4>Marketplace Ads</h4>
+<table class="table table-bordered table-hover table-inverse">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      
+      <th colspan="6">Options</th>
+      
+      <th></th> 
+    </tr>  
+    <tr>  
+      <th colspan="3"></th> 
+       
+      <th>Star</th> 
+      <th>Night</th>
+      <th>Bed</th>
+      <th>Exit</th>
+      <th></th> 
+    </tr> 
+    
+  </thead> 
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <% data.forEach(function(data) { %>
+    <tr>  
+      <th scope="row"><%=data.item_id%></th>
+      <td><%=data.name%></td>
+      <td><%=data.price%></td>
+      
+      <td><%=data.star%></td>
+      <td><%=data.night%></td>
+      <td><%=data.bed%></td>
+      <td><%=data.exitmoiky%> (Day)</td>
+      <td class="text-right">
+        
+        <a class="btn btn-sm btn-primary" href="/marketplace/ads-<%=data.id%>.html">Set Ads</a>
+        
+      </td>
+    </tr> 
+    <% }); %>
+    
   </tbody>
-</table>
+</table> 
